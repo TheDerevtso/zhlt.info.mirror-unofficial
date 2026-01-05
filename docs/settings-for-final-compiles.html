@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- GTM -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-M8XV5HD');</script>
+	<!-- End GTM -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Recommended settings for final compiles - Zoner's Half-Life Tools reference (ZHLT)</title>
+	<meta name="DC.title" content="Recommended settings for final compiles - Zoner's Half-Life Tools reference (ZHLT)">
+	<meta name="description" content="Recommended compile settings when making final versions of maps for release using Zoner's Half-Life tools (ZHLT) 3.">
+	<meta name="DC.description" content="Recommended compile settings when making final versions of maps for release using Zoner's Half-Life tools (ZHLT) 3.">
+	<meta name="keywords" content="zhlt, final, release, compile, compiles, mapping, full, extra">
+	<meta name="DC.language" content="en">
+	<link rel="stylesheet" type="text/css" href="zhlt.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="canonical" href="http://zhlt.info/settings-for-final-compiles.html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<!-- GTM (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8XV5HD"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End GTM (noscript) -->
+	
+	<h1>Recommended settings for final compiles</h1>
+	<h2>ZHLT parameters to use for final compilation of maps</h2>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<p>These settings are recommended for each final build of your Half-Life map which is to be released. Compiles using these options will generally take longer than default compiles, so as a rule should only be used for final compiles (except for the options for custom wad files which should always be used when required). You will probably use other switches (e.g. if you use wad config files) in addition to these. A list of all commands for the compile tools can be found in the <a href="command-reference.html">Command Reference</a>. If you do not need to use your computer while it is compiling, you should use the <a href="command-reference.html#shared-lowhigh" class="notranslate">-high</a> switch with all four compile tools (opt_plns does not share this switch).</p>
+
+	<h2 class="notranslate"><a id="HLCSG"></a>HLCSG</h2>
+	<p>The following switch should be used to remove &quot;sticky&quot; corners. However if it causes problems, try a different <a href="command-reference.html#hlcsg-cliptype" class="notranslate">-cliptype</a> option.</p>
+	<ul>
+		<li class="notranslate"><a href="command-reference.html#hlcsg-cliptype">-cliptype</a> precise</li>
+	</ul>
+	<p>If you are using custom wad files, should also use these switches:</p>
+	<ul>
+		<li><a href="command-reference.html#hlcsg-wadautodetect" class="notranslate">-wadautodetect</a></li>
+		<li><a href="command-reference.html#hlcsg-wadinclude" class="notranslate">-wadinclude file</a></li>
+	</ul>
+	<p>You may also wish to use the <a href="using-wad.cfg.html">texture wad configuration file</a>. It is strongly recommended not to use the <a href="command-reference.html#hlcsg-nowadtextures" class="notranslate">-nowadtextures</a> switch.</p>
+
+	<h2 class="notranslate"><a id="HLBSP"></a>HLBSP</h2>
+	<p>If you have sticky corners after using <span class="notranslate"><a href="command-reference.html#hlcsg-cliptype">-cliptype</a> precise</span> in <span class="notranslate">HLCSG</span>, it is usually caused by bad brushwork, and fixing this may cause the error. For example, with a ramp and a platform at the top of the ramp where there is a clipping error between the two brushes, merging the two into one brush can often solve the problem. See <a href="pics/clipping-error-example.gif">this diagram</a> for an example.</p>
+	<p>If it is not possible to pin down the source of the clipping errors, as a last resort you can try setting <span class="notranslate"><a href="command-reference.html#hlbsp-maxnodesize">-maxnodeside</a> 8192</span>. It will slow compilation but fixes many errors in the clipping hulls. This should only be used if all else fails, as it can cause problems during VIS.</p>
+
+	<h2 class="notranslate"><a id="HLVIS"></a>HLVIS</h2>
+	<p>This setting is a must for final compiles.</p>
+	<ul>
+		<li><a href="command-reference.html#hlvis-full" class="notranslate">-full</a></li>
+	</ul>
+
+	<h2 class="notranslate"><a id="HLRAD"></a>HLRAD</h2>
+	<p>This setting is a must for final compiles.</p>
+	<ul>
+		<li><a href="command-reference.html#hlrad-extra" class="notranslate">-extra</a></li>
+	</ul>
+	<p>If you are using custom shadows, also use these switches:</p>
+	<ul>
+		<li><a href="command-reference.html#hlrad-customshadowwithbounce" class="notranslate">-customshadowwithbounce</a></li>
+		<li><a href="command-reference.html#hlrad-rgbtransfers" class="notranslate">-rgbtransfers</a></li>
+	</ul>
+	<p>If you are using many dynamic lights and are getting the <a href="common-mapping-problems.html#too_many_light_styles_on_a_face">"<span class="notranslate">too many lightstyles</span>" errors</a>, try the following:</p>
+	<ul>
+		<li><a href="command-reference.html#hlrad-nodynbounce" class="notranslate">-nodynbounce</a></li>
+	</ul>
+
+	<p><a class="index" href="./">Back to the Index</a></p>
+</body>
+</html>

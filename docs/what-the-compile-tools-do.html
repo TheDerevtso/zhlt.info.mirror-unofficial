@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- GTM -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-M8XV5HD');</script>
+	<!-- End GTM -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>What the ZHLT compile tools do - Zoner's Half-Life Tools reference (ZHLT)</title>
+	<meta name="DC.title" content="What the ZHLT compile tools do - Zoner's Half-Life Tools reference (ZHLT)">
+	<meta name="description" content="Explains what each compile tool does in the Zoner's Half-Life tools (ZHLT) 3 toolset.">
+	<meta name="DC.description" content="Explains what each compile tool does in the Zoner's Half-Life tools (ZHLT) 3 toolset.">
+	<meta name="keywords" content="zhlt, hlcsg, hlbsp, hlvis, hlrad, csg, bsp, vis, rad, qcsg, qbsp, qvis, qrad, ripent, ripents, count_ents, opt_plns">
+	<meta name="DC.language" content="en">
+	<link rel="stylesheet" type="text/css" href="zhlt.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="canonical" href="http://zhlt.info/what-the-compile-tools-do.html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<!-- GTM (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8XV5HD"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End GTM (noscript) -->
+
+	<h1>What the <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> compile tools do</h1>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<p>There are seven programs included in this release. <span class="notranslate">HLCSG</span>, <span class="notranslate">HLBSP</span>, <span class="notranslate">HLVIS</span> and <span class="notranslate">HLRAD</span> together build and light your map and are generally all used every time you compile your map (unless you are doing only partial compiles after an initial full compile).</p>
+
+	<h2><a id="HLCSG"></a><span class="notranslate">HLCSG</span></h2>
+	<p>Does constructive solid geometry calculations to the map, effectively breaking up complex brushes into simpler polygons, and makes 4 hull files for <span class="notranslate">HLBSP</span> to use. It replaces <span class="notranslate">QCSG/CSG (qcsg.exe)</span> from the original compile tools. See the <a href="command-reference.html#hlcsg">list of commands for <span class="notranslate">HLCSG</span></a>.</p>
+
+	<h2><a id="HLBSP"></a><span class="notranslate">HLBSP</span></h2>
+	<p>Generates the <span class="notranslate">BSP</span> trees for the map and creates a runnable <span class="notranslate">BSP</span>. It replaces <span class="notranslate">QCSG/CSG (qbsp2.exe)</span> from the original compile tools. See the <a href="command-reference.html#hlbsp">list of commands for <span class="notranslate">HLBSP</span></a>.</p>
+
+	<h2><a id="HLVIS"></a><span class="notranslate">HLVIS</span></h2>
+	<p>Generates the visibility matrix (specifies which polygons the player can't or might be able to see) for the map and helps speed up its rendering. It replaces <span class="notranslate">QVIS/VIS (vis.exe)</span> from the original compile tools. See the <a href="command-reference.html#hlvis">list of commands for <span class="notranslate">HLVIS</span></a>.</p>
+
+	<h2><a id="HLRAD"></a><span class="notranslate">HLRAD</span></h2>
+	<p>Generates and applies all lighting effects for the map, such as light entities and the sky, and makes it look good. This is usually the slowest of the four tools to run. It replaces <span class="notranslate">QRAD/RAD (qrad.exe)</span> from the original compile tools. See the <a href="command-reference.html#hlrad">list of commands for <span class="notranslate">HLRAD</span></a>.</p>
+
+	<h2><a id="Ripent"></a><span class="notranslate">Ripent</span></h2>
+	<p>Ripent is a tool for importing and exporting a list of entities to and from <span class="notranslate">BSP</span> files. It can be used to obtain a list of entities in a <span class="notranslate">BSP</span> map file, which can then be edited and imported back into the <span class="notranslate">BSP</span>.</p>
+	<p>Available command line options are:</p>
+	<table>
+		<tr>
+			<th class="notranslate">-import<br>-export</th>
+			<td>
+				Import or export an entity list to/from a <span class="notranslate">BSP</span>.
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">-texdata #</th>
+			<td>
+				Alter maximum texture memory limit. For more information see the <span class="notranslate">-texdata</span> switch in the command reference in the shared options list <a href="command-reference.html#shared-options">here</a>.
+			</td>
+		</tr>
+	</table>
+
+	<h2><a id="count_ents"></a><span class="notranslate">count_ents</span></h2>
+	<p>This tool counts the number of entities in a map.</p>
+	<p>Available command line options are:</p>
+	<table>
+		<tr>
+			<th class="notranslate">-nopause</th>
+			<td>
+				Skip keypress prompt on completion.
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">-entityfile filename</th>
+			<td>
+				File containing weights to assign to each entity; unlisted entities have a weight of zero.
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">-logfile filename</th>
+			<td>
+				Specify file name to use for logging screen output.
+			</td>
+		</tr>
+	</table>
+
+	<h2><a id="opt_plns"></a><span class="notranslate">opt_plns</span></h2>
+	<p>This is a <span class="notranslate">BSP</span> optimizer. It examines the finished <span class="notranslate">BSP</span> file and removes any planes which are not referenced by other planes, thus reducing the total amount of planes in the <span class="notranslate">BSP</span>. It generally results in around a 60% reduction in planes, although lower and higher values have been observed.</p>
+	<p>The functionality provided with this tool is included in <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 3, and it is not required when these tools are used. It can be used to optimise maps compile with <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> versions before XP-Cagey's p14 build, when this functionality was included in the main compile tools. If using an up-to-date version of <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr>, you do not need to use <span class="notranslate">opt_plns</span>.</p>
+	<p>This tool is generally only used for map releases (unless you are using more than 32767 planes before optimization), as it breaks <span class="notranslate">HLCSG -onlyents</span> and <span class="notranslate">HLRAD</span>, so after using it any changes will require a full recompile. Make <span class="notranslate">opt_plns</span> the final step when you're compiling.</p>
+	<p>Available command line options are:</p>
+	<table>
+		<tr>
+			<th class="notranslate">-nopause</th>
+			<td>
+				Skip keypress prompt on completion.
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">-logfile filename</th>
+			<td>
+				Specify file name to use for logging screen output.
+			</td>
+		</tr>
+	</table>
+
+	<p><a class="index" href="./">Back to the Index</a></p>
+</body>
+</html>

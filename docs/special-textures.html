@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- GTM -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-M8XV5HD');</script>
+	<!-- End GTM -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>ZHLT special textures - Zoner's Half-Life Tools reference (ZHLT)</title>
+	<meta name="DC.title" content="ZHLT special textures - Zoner's Half-Life Tools reference (ZHLT)">
+	<meta name="description" content="Special textures used by Zoner's Half-Life tools (ZHLT) 3. Provides information about these textures">
+	<meta name="DC.description" content="Special textures used by Zoner's Half-Life tools (ZHLT) 3. Provides information about these textures">
+	<meta name="keywords" content="texture, textures, hint, skip, bevel, null, clip, hintskip">
+	<meta name="DC.language" content="en">
+	<link rel="stylesheet" type="text/css" href="zhlt.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="canonical" href="http://zhlt.info/special-textures.html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<!-- GTM (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8XV5HD"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End GTM (noscript) -->
+	
+	<h1><a id="top"></a><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> special textures</h1>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<p>These are new textures, found in the <span class="notranslate">zhlt.wad</span> file. They do not act like normal textures as they are not rendered, but instead tell the compile tools to perform certain functions. An example of an existing special texture is the <span class="notranslate">CLIP</span> texture from the Half-Life wads, which is used to create a solid but invisible barrier.</p>
+
+	<h2><a id="bevel"></a><img src="pics/bevel.gif" alt="BEVEL texture" width="16" height="16"> The <span class="notranslate">BEVEL</span> texture</h2>
+	<p>This texture acts like a <span class="notranslate">NULL</span> texture but also doesn't expand when generating clip hulls. It can be used to eliminate exterior corner clipping bugs without using &quot;<span class="notranslate">-cliptype precise</span>&quot; (although &quot;<span class="notranslate">-cliptype precise</span>&quot; is still the recommended method for removing clipping errors, as this feature is experimental).</p>
+
+	<h2><a id="hint"></a><img src="pics/hint.gif" alt="HINT texture" width="16" height="16"> The <span class="notranslate">HINT</span> texture</h2>
+	<p>This texture is used to force BSP to create a break in the VIS block. It is used in certain situations to reduce <span class="notranslate">r_speed</span> values, although misuse can increase <span class="notranslate">r_speed</span> values. The <span class="notranslate">HINT</span> texture is applied to only one face of a brush, the other faces must be <span class="notranslate">SKIP</span>, and the whole brush is known as a &quot;hint brush&quot;.</p>
+	<p>More information about how to use the <span class="notranslate">HINT</span>/<span class="notranslate">SKIP</span> textures is available <a href="common-mapping-problems.html#how_do_i_use_hints">here</a>.</p>
+
+	<h2><a id="null"></a><img src="pics/null.gif" alt="NULL texture" width="16" height="16"> The <span class="notranslate">NULL</span> texture</h2>
+	<p>The <span class="notranslate">NULL</span> texture is one that is removed from the map during compilation, so that it won't exist when you play the compiled .bsp file in Half-Life. You should be able to apply it to any entity or world brush within your map.</p>
+	<p>The main point of this texture is to use it on faces that the player would under normal circumstances never see, so that those faces will not add to the <span class="notranslate">w_poly</span> count and lower the fps (frames per second) rate (that doesn't mean you can't use it for whatever you want, however). You can also use the SKY texture for this exact same purpose, although it is debatable whether this is actually beneficial. While it does lower the <span class="notranslate">w_poly</span> count, it apparently also lowers the fps rate, thereby defeating its original purpose.</p>
+	<p>Note that:</p>
+	<ul>
+		<li><span class="notranslate">NULL</span> textured brushes still block VIS.</li>
+		<li>If you have a <span class="notranslate">NULL</span> surface on a HULL brush (i.e. a brush acting as the outer layer of your map, sealing it from the void), then in Half-Life the absence of any textured polygon(s) being rendered in that space will cause a Hall of Mirrors effect. This is intended behaviour, and should be accounted for by the mapper.</li>
+		<li><span class="notranslate">NULL</span> textures will still block the player in Half-Life (and anything else that should collide with a wall), even though they are not rendered. This is to preserve the collision detection of the entire brush. If you want to disable this, then just make the brush a <span class="notranslate">func_illusionary</span>.</li>
+	</ul>
+	<p>The <span class="notranslate">CLIP</span> texture now works in the same fashion as the <span class="notranslate">NULL</span> texture for backwards compadibility.</p>
+
+	<h2><a id="skip"></a><img src="pics/skip.gif" alt="SKIP texture" width="16" height="16"> The <span class="notranslate">SKIP</span> texture</h2>
+	<p>The <span class="notranslate">SKIP</span> texture is used to cover all the other faces of a brush which have a face with a <span class="notranslate">HINT</span> texture. The <span class="notranslate">SKIP</span> texture is non-solid and has no special effects.</p>
+
+	<h2><a id="hintskip"></a>The <span class="notranslate">HINTSKIP</span> texture</h2>
+	<p>The <span class="notranslate">HINTSKIP</span> texture was removed in <a href="version-history.html#3.2.1"><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 3.2.1</a>.</p>
+
+	<p><a class="index" href="./">Back to the Index</a></p>
+</body>
+</html>

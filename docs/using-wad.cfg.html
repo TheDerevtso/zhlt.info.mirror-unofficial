@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- GTM -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-M8XV5HD');</script>
+	<!-- End GTM -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Using the texture wad configuration file (wad.cfg) - Zoner's Half-Life Tools reference (ZHLT)</title>
+	<meta name="DC.title" content="Using the texture wad configuration file (wad.cfg) - Zoner's Half-Life Tools reference (ZHLT)">
+	<meta name="description" content="How to compile using the the texture wad configuration file (wad.cfg) with Zoner's Half-Life tools.">
+	<meta name="DC.description" content="How to compile using the the texture wad configuration file (wad.cfg) with Zoner's Half-Life tools.">
+	<meta name="keywords" content="zhlt, texture, wad configuration file, wad, wad.cfg, wad file, wad files">
+	<meta name="DC.language" content="en">
+	<link rel="stylesheet" type="text/css" href="zhlt.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="canonical" href="http://zhlt.info/using-wad.cfg.html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<!-- GTM (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8XV5HD"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End GTM (noscript) -->
+	
+	<h1>Using the texture wad configuration file (<span class="notranslate">wad.cfg</span>)</h1>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2>About <span class="notranslate">wad.cfg</span></h2>
+	<p>The texture wad configuration file, called <span class="notranslate">wad.cfg</span> should be extracted to the same directory as the compile tools, or your Half-Life directory.</p>
+
+	<h2>Whats the purpose of this feature?</h2>
+	<p>Say, you map for 3 mods: Counter-Strike, TFC, and normal Half-Life single player. All three of these mods use different wads. Say you wanted to work on your Counter-Strike map one day, and TFC the next: because Worldcraft does not store which wad files are in use for each game configuration, you would need to go into Worldcraft texture configuration, Add/Remove wad files from the list, and Restart Worldcraft.</p>
+	<p>The idealistic solution to this would be to make it so that Worldcraft stores which wad files are in use for any given game configuration, but that's not as easy as it would first appear.</p>
+
+	<h2>The solution</h2>
+	<p>In the mean time, you can use this method to overcome the hassle of restarting Worldcraft. In the <span class="notranslate">wad.cfg</span> file, you can explicitly define what wads you want written into the <span class="notranslate">.bsp</span> file, regardless of what happens to be in Worldcraft, for any given game configuration. So, now, <span class="notranslate">HLCSG</span> will ignore the wads that you have configured in Worldcraft, and instead only write in the ones you specify.</p>
+	<p>The specific syntax for the file is the following:</p>
+	<div class="notranslate">
+	<div><code>configuration_name</code></div>
+	<div><code>{</code></div>
+	<div><code>c:\path\to\wad\wad1.wad</code></div>
+	<div><code>c:\path\to\wad\wad2.wad</code></div>
+	<div><code>include c:\path\to\wad\wad3.wad</code></div>
+	<div><code>}</code></div>
+	</div>
+
+	<p>Where</p>
+	<ul>
+		<li><code class="notranslate">configuration_name</code> is some sort of descriptive word. Examples: valve, cs, tfc etc.</li>
+		<li><code class="notranslate">c:\path\to\wad\wadn.wad</code> is the full path to a texture wad file. if you are unsure as to what this should be, take a look at the paths in the Textures tab in Worldcraft configuration.</li>
+		<li>If a wad is prefixed by <code class="notranslate">include</code>, that wad will be automatically wadincluded into the <span class="notranslate">.bsp</span> file.</li>
+		<li>There is no limit to the number of configurations, or the number of wads you can have per configuration.</li>
+	</ul>
+
+	<p>All that remains now is to run <span class="notranslate">hlcsg.exe</span> with the parameter <span class="notranslate">-wadconfig configuration_name</span>.</p>
+
+	<p>Lets take an example. Say you want to create a configuration called '<span class="notranslate">my_wads</span>'. It has 3 standard wadfiles in it: '<span class="notranslate">halflife.wad</span>', '<span class="notranslate">liquids.wad</span>' and '<span class="notranslate">xeno.wad</span>', all of which can be found in the valve directory, because they all came with Half-Life. It also has a custom wad created by me called '<span class="notranslate">mywad.wad</span>', which you want to compile into the <span class="notranslate">.bsp</span> file, which also happens to be in the valve directory. My configuration might look something like this:</p>
+
+	<div class="notranslate">
+	<div><code>my_wads</code></div>
+	<div><code>{</code></div>
+	<div><code>C:\Sierra\Half-Life\valve\halflife.wad</code></div>
+	<div><code>C:\Sierra\Half-Life\valve\liquids.wad</code></div>
+	<div><code>C:\Sierra\Half-Life\valve\xeno.wad</code></div>
+	<div><code>include C:\Sierra\Half-Life\valve\mywad.wad</code></div>
+	<div><code>}</code></div>
+	</div>
+
+	<p>Now, when you run <span class="notranslate">hlcsg.exe</span> when you compile your map, you put <span class="notranslate">-wadconfig my_wads</span> in the command line.</p>
+
+	<p>If you really don't understand the <span class="notranslate">wad.cfg</span> file syntax, then don't worry. You don't have to use it. However, it does come with some example configurations already in it; just open it in notepad and see if you can get the hang of it, because it can be quite handy.</p>
+
+	<p><a class="index" href="./">Back to the Index</a></p>
+</body>
+</html>

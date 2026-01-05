@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- GTM -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-M8XV5HD');</script>
+	<!-- End GTM -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Common Half-Life mapping problems &amp; compile errors - Zoner's Half-Life Tools reference (ZHLT)</title>
+	<meta name="DC.title" content="Common Half-Life mapping problems &amp; compile errors - Zoner's Half-Life Tools reference (ZHLT)">
+	<meta name="description" content="Common mapping problems when making maps with Zoner's Half-Life tools (ZHLT) 3 for Half-Life. Explains problems and their solutions, and provides links to other help sources.">
+	<meta name="DC.description" content="Common mapping problems when making maps with Zoner's Half-Life tools (ZHLT) 3 for Half-Life. Explains problems and their solutions, and provides links to other help sources.">
+	<meta name="keywords" content="zhlt, Half-Life, mapping, map, maps, problem, problems, compile, error, errors, crash, ">
+	<meta name="DC.language" content="en">
+	<link rel="stylesheet" type="text/css" href="zhlt.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="canonical" href="http://zhlt.info/common-mapping-problems.html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<!-- GTM (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8XV5HD"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End GTM (noscript) -->
+	
+	<h1><a id="top"></a>Common Half-Life mapping problems &amp; compile errors</h1>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<p>This page lists the main problems mappers might come across and the main errors they might experience when using these tools. A more complete list of errors is available on the internet <a href="http://www.47hassocks.freeserve.co.uk/compileprobs.htm" rel="external nofollow">here</a>, <a href="http://www.frankclan.ca/maps/map_resources/mirrored/errors.shtml" rel="external nofollow">here</a>, and another one <a href="http://www.slackiller.com/tommy14/errors.htm">here</a>, although it does not cover features (particularly raised limits) of the newer tools.</p>
+
+	<ul>
+		<li class="notranslate"><a href="#plane_with_no_normal">Plane with no normal</a></li>
+		<li class="notranslate"><a href="#brush_with_coplanar_faces">Brush with coplanar faces</a></li>
+		<li class="notranslate"><a href="#brush_outside_world">Brush 'outside world'</a></li>
+		<li class="notranslate"><a href="#mixed_face_contents">Mixed face contents</a></li>
+		<li class="notranslate"><a href="#leak_in_hull_0">=== LEAK in hull 0 ===</a></li>
+		<li class="notranslate"><a href="#leak_in_hull_1">=== LEAK in hull 1 ===</a></li>
+		<li class="notranslate"><a href="#leak_in_hull_2">=== LEAK in hull 2 ===</a></li>
+		<li class="notranslate"><a href="#leak_in_hull_3">=== LEAK in hull 3 ===</a></li>
+		<li class="notranslate"><a href="#leaf_portal_saw_into_leaf">Leaf portal saw into leaf</a></li>
+		<li class="notranslate"><a href="#exceeded_max_patches">Exceeded MAX_PATCHES</a></li>
+		<li><a href="#hlvis_is_slow"><span class="notranslate">HLVIS</span> is SLOW</a></li>
+		<li><a href="#hlrad_is_slow_or_stuck_on_makescales"><span class="notranslate">HLRAD</span> is SLOW/stuck on makescales</a></li>
+		<li class="notranslate"><a href="#bad_surface_extents">Bad Surface Extents</a></li>
+		<li class="notranslate"><a href="#missing_bracket_in_texturedef">Missing '[' in texturedef</a></li>
+		<li class="notranslate"><a href="#no_vis_information_direct_lighting_only">No vis information, direct lighting only</a></li>
+		<li class="notranslate"><a href="#too_many_light_styles_on_a_face">Too many light styles on a face</a></li>
+		<li class="notranslate"><a href="#max_portals_on_leaf">MAX_PORTALS_ON_LEAF</a></li>
+		<li class="notranslate"><a href="#max_map_clipnodes">MAX_MAP_CLIPNODES</a></li>
+		<li class="notranslate"><a href="#max_map_planes">MAX_MAP_PLANES</a></li>
+		<li><a href="#how_do_i_use_hints">How do I use <span class="notranslate">HINT</span>s?</a></li>
+		<li class="notranslate"><a href="#not_valid_win32_applicaion">hlcsg/hlbsp/hlvis/hlrad.exe is not a valid Win32 application</a></li>
+	</ul>
+
+	<h2 class="notranslate"><a id="plane_with_no_normal"></a>Plane with no normal</h2>
+	<p>Example:</p>
+	<div><code class="notranslate">Entity 10, Brush 0, Side 4: plane with no normal</code></div>
+	<div><code class="notranslate">Entity 10, Brush 0, Side 5: plane with no normal</code></div>
+	<p>This error is always caused by vertex manipulation. A plane is defined by 3 unique coordinates. If any of the three coordinates are the same, then you don't really have a plane (its either a line or a point). There is no way to fix this error other than to delete the brush and recreate it completely.</p>
+	<p>This is most commonly caused by dragging a vertex ontop of another to destroy it for several vertexes of the same face. The resulting brush can even look correct, but the side which you have destroyed can still have a point or two defined for it. The proper way to remove a face is to use a clipper. If the object is simple (say converting a square to a wedge), then dragging an edge via the yellow control points to merge multiple vertexes at once will probably be safe.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="brush_with_coplanar_faces"></a>Brush with coplanar faces</h2>
+	<p>Example:</p>
+	<div><code class="notranslate">Entity 10, Brush 0, Side 5: has a coplanar plane at (-753, -9, 251), texture CA1X_CON1B</code></div>
+	<div><code class="notranslate">Entity 10, Brush 0, Side 6: has a coplanar plane at (-753, -32, 251), texture CA1X_CON1B</code></div>
+	<p>This is always caused by vertex manipulation. Say you have a five sided object like the following diagram:</p>
+	<p><img src="pics/coplanar-1.gif" alt="Diagram - Five sided object" width="243" height="262"></p>
+	<p>Moving the top point down to make the object into a square, will cause this error, as now 2 faces are on the same plane, which is not allowed:</p>
+	<p><img src="pics/coplanar-2.gif" alt="Diagram - Two faces on same plane makes brush invalid" width="226" height="203"></p>
+	<p>To fix this problem, either move the vertex causing the coplanar warning to make the brush convex again, or move the rogue vertex onto one of its neighbors to destroy it.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="brush_outside_world"></a>Brush 'outside world'</h2>
+	<p>Example:</p>
+	<div><code class="notranslate">Entity 10, Brush 0: outside world(+/-4096): (-9000, -64, 216)-(9000,23,283)</code></div>
+	<p>There are a few cases that create the '<span class="notranslate">outside world</span>' error. The first is an damaged brush, almost always created by a vertex manipulation gone wrong. The coordinates listed in the error are very important in diagnosing the error. If any of the coordinates are -9000 or 9000, then the brush is damaged, and most likely needs replacing completely.</p>
+	<p>The second most common case is actually having a brush near or outside the edge of the allowable region for the world. The brushes are expanded slightly for some of the calculations during a compile, so brushes near the edge within 64 units will cause the error too. The cordon tool creates brushes automatically to box in the cordon region, and their brushes can sometimes be quite large, and also extend outside the world. This can be verified by opening up the .map created by an export with cordon enabled, and looking to see what brushes it made.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="mixed_face_contents"></a>Mixed face contents</h2>
+	<p>Example:</p>
+	<div><code class="notranslate">Entity 0, Brush 12: mixed face contents</code></div>
+	<div><code class="notranslate"> &nbsp; &nbsp; Texture ROCK_X1 and SKY</code></div>
+	<div><code class="notranslate">Entity 0, Brush 37: mixed face contents</code></div>
+	<div><code class="notranslate"> &nbsp; &nbsp; Texture STEEL_9 and WATER7</code></div>
+	<p>In Half-Life, brushes are required to have all faces be of the same type (solid, water, slime, sky, origin). Fortunately almost all textures are solid. If you put a water texture on one side of a brush which has dirt or steel textures for example, that would generate the error. The engine needs to know what is inside the brush, and it would be real confusing if different types could be put onto the same brush.</p>
+	<p>The fix is relatively simple. Simlpy find the offending brush, and then the faces with the inappropriate texture and change it. If a brush uses <span class="notranslate">SKY</span>, all sides must be sky. The same is true for <span class="notranslate">CLIP</span>, and <span class="notranslate">ORIGIN</span> textures as well. If you are careful it is possible to mix water textures (provided you don't accidently use a slime texture on the brush).</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="leak_in_hull_0"></a>=== LEAK in hull 0 ===</h2>
+	<p>The leak messages starting with <a href="version-history.html#zhlt2.4"><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 2.4</a> were updated to replace the old '<span class="notranslate">LEAK LEAK LEAK</span>' messages. The entity listed along with the error is just where the beginning of where the pointfile is created, and can be used to help find the start of the line. It always goes from inside towards the outside, from this position. Deleting this entity will usually just cause the leak to start somewhere else, without actually fixing it.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="leak_in_hull_1"></a>=== LEAK in hull 1 ===</h2>
+	<h2 class="notranslate"><a id="leak_in_hull_2"></a>=== LEAK in hull 2 ===</h2>
+	<h2 class="notranslate"><a id="leak_in_hull_3"></a>=== LEAK in hull 3 ===</h2>
+	<p>You can generally ignore these, but there is a possibility that part of the world somewhere will either be solid where it shouldn't, or vice versa.</p>
+
+	<h2 class="notranslate"><a id="leaf_portal_saw_into_leaf"></a>Leaf portal saw into leaf</h2>
+	<p>This occurs when you have a leaf which isn't entirely convex, so that at one position within the leaf you can look out of the leaf and see back into it.</p>
+	<p>This is often a difficult error to track down as changes in the brushes in your map may cause an increase in leafportal errors. Brushes with many faces sharing the same vertex, such as spikes, are particularly common causes of this error. Doing a <span class="notranslate"><a href="command-reference.html#hlvis-full">-full VIS</a></span> often fixes this problem. If all else fails, changing the brush to a <span class="notranslate">func_wall</span> may solve the problem.</p>
+	<!--<p>You can get additional help with this error <a href="http://www.frankclan.ca/maps/map_resources/mirrored/errors.shtml#leafsaw">here</a>.</p>-->
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="exceeded_max_patches"></a>Exceeded MAX_PATCHES</h2>
+	<p>When <span class="notranslate">HLRAD</span> runs, it takes all the visible faces in the game, and divides them into sections called patches. These patches are the textures used as the lightmaps for the world. There is a hard limit of 65535 patches that <span class="notranslate">HLRAD</span> can deal with. By default, a 64x64 game unit chunk of space is the size of one patch. If the texture scaling (not texture size) is larger or smaller, it will directly affect the lightmap size as well. This means a texture with scale of 2, will have at best 1/4th as many patches as a texture with a scale of 1.</p>
+	<p>Putting a 'box' around the level to protect from leaks is the most commmon cause of this error, beyond excessively large maps. The box causes vis to keep the faces on the outside which would normally be thrown away. These faces are then required to have lightmaps. Worst case, is that putting a box around the level will usually cause an extra 40-80% more lightmaps to be created than necessary.</p>
+	<p>Barring having a box, the other cause is large maps. The fixes are varied but can only help so far. Using <a href="command-reference.html#hlrad-chop" class="notranslate">-chop</a> values larger than the default 64 for <span class="notranslate">HLRAD</span> will cause the lightmaps to be larger. However, for values larger than around 96 the lightmaps start looking bad, and will more prominently show the 'staircase' effect on shadows. Using a larger scale on large textures (dirt, rock walls, concrete) will help those large surfaces consume fewer lightmaps.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2><a id="hlvis_is_slow"></a><span class="notranslate">HLVIS</span> is SLOW</h2>
+	<p>For most well designed maps, vis should have a worst case run time of about 45 minutes on a single P2-300 class computer. If it is taking longer, then the map probably needs work to add vis blockers. Several things can make vis take way longer than usual:</p>
+	<p>First, if the world has been 'boxed in' to prevent leaks, vis has to spend large amounts of time on the exterior gaps which would normally not exist on a map without a box.</p>
+	<p>Second, The architecture which connects 'areas' together might be a bit confusing for vis to figure out. It is somewhat difficult to explain, but a few examples would be: halls lacking a wall somewhere which is not directly on the XZ or YZ plane; halls that intersect rooms on a plane other than XZ or YZ, large rooms with walls that are not vertical; halls that connect two areas but the areas can see each other through the hall; Lots of little tiny brushwork in an area (especially large areas) that is not an entity.</p>
+	<p>Third, vis is quickly brought to a crawl by large outdoor areas that are not extremely carefully constructed to not too see much 'indoors'.	</p>
+	<p>And finally, using an older version of <a href="http://halflifemods.mex.tl/948173_gen-surf--v1-9.html" class="notranslate">gensurf</a> that does not support <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr>'s <a href="special-textures.html#hint"><span class="notranslate">HINT</span> brushes</a>.</p>
+	<p>It is highly advised experiment heavily with test maps with sample architecture, using software mode, <span class="notranslate">r_drawflat 1</span>, and <span class="notranslate">r_draworder 1</span> in order to see how vis works. Also, read the <span class="notranslate">HINT</span> brush tutorials described in the <a href="#how_do_i_use_hints">section on <span class="notranslate">HINT</span>s</a>.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2><a id="hlrad_is_slow_or_stuck_on_makescales"></a><span class="notranslate">HLRAD</span> is SLOW/stuck on makescales</h2>
+	<p><span class="notranslate">HLRAD</span> requires large amounts of memory to run efficiently for all but the most trivial of maps.</p>
+	<p>The vismatrix <span class="notranslate">HLRAD</span> needs to run takes exponentially more RAM as the vismatrix grows. The formula is 'number of patches' squared, then divided by 16. This number is how many bytes it will consume. The maximum is 65535 patches, so the maximum vismatrix is 256MB of RAM.</p>
+	<p>Furthermore, the amount of memory the vismatrix uses is not all the memory <span class="notranslate">HLRAD</span> needs to run. Depending on the visibility of the map, the 'scales' cache consumes large amounts of memory at once as well. For most maps, this amount of memory is close to 1/2 the size of the vismatrix. This generally equates to a maximum of 128MB, or a system total of 384MB to run the worst case (65535 patches) map.</p>
+	<p>The makescales phase has a tendency to run fast right up until it runs out of physical memory and has to start relying on the swapfile. This is frequently noticeable as makescales running quickly (say 20 minutes) up until the 90% mark, then taking several hours to finish the last 10%. This is always caused by running out of physical memory, and the last 10% work requiring heavy use of the swapfile. If more architecture is added to the map, one can see that it will start taking exponentially longer to compile, until the RAM is upgraded.</p>
+	<p>Besides simply adding large quantities of RAM to the computer, the fix for this problem is identical to fixing a <a href="#exceeded_max_patches"><span class="notranslate">MAX_PATCHES</span> error</a>. Applying those fixes will reduce the number of patches, and cause <span class="notranslate">HLRAD</span> to need less memory, often speeding up the compile dramatically. If all has been done, there is also the option of using <span class="notranslate"><a href="command-reference.html#hlrad-bounce">-bounce</a> 0</span> with <span class="notranslate">HLRAD</span>, and using just direct lighting for test compiles of the map. Ideally one would then using a non-zero <a href="command-reference.html#hlrad-bounce" class="notranslate">-bounce</a> for the final compile.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="bad_surface_extents"></a>Bad Surface Extents</h2>
+	<p>This is typically caused by having extremely large scales on faces, (typically far above 10, usually 100+). Otherwise it almost always shows up on a 'check for problems' in Worldcraft as a '<span class="notranslate">texture axis perpendicular to face</span>' error.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="missing_bracket_in_texturedef"></a>Missing '[' in texturedef</h2>
+	<p>This error message can be caused several ways:</p>
+	<ul>
+		<li>One or more faces has no texture, or the texturename is just made up of spaces. Check for problems in Worldcraft 3.3 should detect them as 'invalid texture' messages.</li>
+		<li>The texture name on one or more faces has a space in the middle of the name somehow (textures are not allowed to have spaces in their names).</li>
+		<li>You are using Worldcraft 2.0 or 2.1, and the worldspawn has a key/value of "mapversion" "220". If so, remove it.</li>
+		<li>A Worldcraft 3.3 map was imported into Worldcraft 2.1 or 2.2, same problem as above.</li>
+		<li>A Worldcraft 3.3 map was imported into <abbr title="Quake Army Knife">QuArK</abbr>, also the same problem.</li>
+		<li>The map is in Worldcraft 3.3's .map format, but the "mapversion" "220" is MISSING from the worldspawn (this is really rare).</li>
+		<li><a id="non_english_characters_texturenames"></a>The Half-Life 1 game engine does not support textures with non-English characters (e.g. &szlig;, &aring;, &ccedil;, etc) in the filenames.</li>
+	</ul>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="no_vis_information_direct_lighting_only"></a>No vis information, direct lighting only</h2>
+	<p><span class="notranslate">HLRAD</span> was run without <span class="notranslate">HLVIS</span> being run first. Only direct lighting can be done, which is equivalent to running <span class="notranslate"><a href="command-reference.html#hlrad-bounce">-bounce</a> 0</span> when there is vis data normally. This warning commonly occurs when compiling from within Worldcraft in normal mode instead of expert mode, as it does vis after rad for some inane reason.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="too_many_light_styles_on_a_face"></a>Too many light styles on a face</h2>
+	<p>A few dynamic lights in an area are trying to light up the same surfaces. This limit is 4. Any light with a targetname (whether it was meant to be switchable or not), and any light set to 'pulsating' etc counts against a dynamic light in the area.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+
+	<h2 class="notranslate"><a id="max_portals_on_leaf"></a>MAX_PORTALS_ON_LEAF</h2>
+	<p>This is normally caused by having large rooms which connect to a lot of other hallways, alcoves, or other similar shapes. Alternatively it is caused by an invalid brush, of which each one is usually unique and you would have to find on your own (though Worldcraft is pretty good about finding them in its 'check for problems' feature).</p>
+	<p><img src="pics/max_portals_on_leaf.gif" alt="Diagram - Max Portals On Leaf" width="454" height="442"></p>
+	<p>This image is an example top-down view of a complex room. The pink area is the room, the blue area are the walls. The main big room is one leaf, each alcove is a leaf, but the big leaf joins all the little ones for a total of 32 portals. <span class="notranslate">MAX_PORTALS_ON_LEAF</span> is 256 in Halflife, so this problem is quite rare and usually a side effect of having a damaged brush in the map.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="max_map_clipnodes"></a>MAX_MAP_CLIPNODES</h2>
+	<p>There isn't any way to add more nodes or clipnodes to the bsp's (its already maxed out). However, at least clipnodes can be reduced with a bit of work.</p>
+	<p>When the maps are compiled all the 3D 'space' a player can get to is broken up into convex regions just like brushes are required to be. A lot of them are extremely small or too small for a player, and if you put a <span class="notranslate">CLIP</span> brush over them they don't become clipnodes at all (well really there are still a few intersecting the brush on its surfaces, but the brush can be excluding dozens or hundreds of them at a time).</p>
+	<p>If the world has had a 'box' placed around it to prevent leaks, its probably causing several thousand (if not 10000+) extraneous nodes and clipnodes to be caused, not only wasting resources but will cause vis to work a lot harder than it needs to. An example map is available, demonstrating how it is possible to reduce the clipnodes in a map. Without the <span class="notranslate">CLIP</span> brush in place, the map requires over a hundred more clipnodes to define the player-accessable space.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="max_map_planes"></a>MAX_MAP_PLANES</h2>
+	<p>The map has grown too complex. There are too many planes in the map and your map will need to be simplified/shrunk.</p>
+	<p>This should be a rare error due to the planes limit being raised in the <a href="version-history.html#p-series">p series</a> of tools (because the <span class="notranslate">opt_plns</span> tool can strip out redundant planes). It was more common with older versions of the tools.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2><a id="how_do_i_use_hints"></a>How do I use <span class="notranslate">HINT</span>s?</h2>
+	<p>There is a great tutorial on <span class="notranslate">HINT</span> brushes on <span class="notranslate">CounterMap</span> <a href="http://www.countermap2.com/Tutorials/tutorial0b30.html?id=2" rel="external">here</a> and another article by <span class="notranslate">David Nixon</span> <a href="http://www.davidnixon.ca/portfolio.php?s=level&litem=03" rel="external">here</a> (formerly hosted on the VERC Collective). There is also an interesting article on constructing pyramidal <span class="notranslate">HINT</span> brushes <a href="http://ninjagrinch.home.comcast.net/~ninjagrinch/pyramidhint.htm">here</a>. See also the information about the <a href="special-textures.html#hint"><span class="notranslate">HINT</span> texture here</a>.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="not_valid_win32_applicaion"></a>hlcsg/hlbsp/hlvis/hlrad.exe is not a valid Win32 application</h2>
+	<p>If you get an error saying that one of the compile tools is not a valid Win32 application (<a href="pics/not_valid_win32_application.png">sample picture</a>), this probably means that you are trying to use the 64-bit version of <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> on a 32-bit machine. Please <a href="download-zhlt.html">download</a> the latest version of <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> for 32-bit processors instead.</p>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+</body>
+</html>

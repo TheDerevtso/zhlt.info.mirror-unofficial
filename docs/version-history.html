@@ -1,0 +1,2867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- GTM -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-M8XV5HD');</script>
+	<!-- End GTM -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>ZHLT version history - Zoner's Half-Life Tools reference</title>
+	<meta name="DC.title" content="ZHLT version history - Zoner's Half-Life Tools reference">
+	<meta name="description" content="Version history for Zoner's Half-Life tools (ZHLT) 3. Details changes since the first release of the tools.">
+	<meta name="DC.description" content="Version history for Zoner's Half-Life tools (ZHLT) 3. Details changes since the first release of the tools.">
+	<meta name="keywords" content="zhlt version history">
+	<meta name="DC.language" content="en">
+	<link rel="stylesheet" type="text/css" href="zhlt.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="canonical" href="http://zhlt.info/version-history.html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<!-- GTM (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8XV5HD"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End GTM (noscript) -->
+	
+	<p><a class="index" href="./">Back to the Index</a></p>
+	<h1><a id="top"></a><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> Version history</h1>
+
+	<ul>
+		<li><a href="#vhlt"><abbr title="Vluzacn's Zoner's Half-Life Tools" class="notranslate">VHLT</abbr> series</a></li>
+		<li><a href="#zhlt3"><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 3 series</a></li>
+		<li><a href="#p-series"><span class="notranslate">XP-Cagey</span>'s p Series</a></li>
+		<li><a href="#mhlt"><span class="notranslate">Merl</span>'s Custom Build</a></li>
+		<li><a href="#zhlt"><span class="notranslate">Zoner</span>'s Half-Life Tools</a></li>
+	</ul>
+
+	<h2><a id="vhly"></a>Vluzacn's <abbr title="Zoner's Half-Life Tools X64" class="notranslate">ZHLT</abbr> (aka <abbr title="Vluzacn's Zoner's Half-Life Tools X64" class="notranslate">VHLT</abbr>)</h2>
+	<p>These tools are built upon the <a href="#zhlt3">final source code of ZHLT 3.4</a>.</p>
+	<h3><a id="latest"></a>Latest version of <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr>:</h3>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="vhlt34"></a>Version 34</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>When 'zhlt_embedlightmap' is set to 1, you can use 'zhlt_embedlightmapresolution' to lower the resolution of the new textures and reduce the space used. For example, set 'zhlt_embedlightmapresolution' to 4 will make the generated textures 4x blurrer(in each direction) than the original texture. Usually 4 is a good value. Other available values are: 1 (default), 2, 4, 8, 16.</p>
+				<p>Added an option to enable the old look of texlights. This is to solve a very specific light bleeding problem as shown in the picture. The problem occurs when a thin texlight is connected to the middle of a wall. To add the gap, set the value of '_texlightgap'("Dark gap in front of texlight") in the properties of light_surface entity. Alternatively, you can set it globally with hlrad parameter '-texlightgap #'.</p>
+				<p>Fixed two potential bugs in zhlt_embedlightmap.</p>
+				<p>Fixed an issue that makes hlrad slow when opaque entities with transparency or toggleable shadow are used on a large scale.</p>
+				<p>Fixed an issue in the bounced light that occasionally cause the light on one patch to bleed too far.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLSCG</th>
+			<td>
+				<p>hlcsg will now report the bad brush before hlrad run into the "Texture axis perpendicular" and "Bad surface extents" errors.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Now the mapper can specify the brush to display when two brushes have overlapping faces in the same plane. To do this, first make sure the two brushes are in the same detail level. Then in the properties of func_detail, give them different values of 'zhlt_coplanarpriority'("Priority when faces overlap").</p>
+				<p>Fixed one potential bug in FixBrinks.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Added full support for 64-bit Windows and Linux.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="vhlt33"></a>Version 33</td>
+		</tr>
+		<tr>
+			<th class="notranslate"></th>
+			<td>
+				<p>Improved the smoothness of bounced light and sky light. The new advanced interpolation algorithm produces better lighting from the per-patch lighting information. The improvement is more clearly visible under the fast mode of hlrad where all lighting are only calculated on each patch.</p>
+				<p>Added a feature to create fake lightmap on transparent entities. Because the lightmap of transparent entities is ignored by the game engine, transparent entities like glass usually looks white without the tint from lightmap and doesn't blend in well with the environment. The new feature solves this problem by altering the texture of a transparent entity. It creates a new texture for each face and embeds the lightmap into this texture. This feature is currently experimental, because it has a big disadvantage: the texture memory will increase significantly. For example, the three glasses in the picture consumes about 135KB texture memory. To enable this feature, just add key 'zhlt_embedlightmap' value '1' into the entity. The textures whose names start with '__rad' were created by the compiler. You can remove them and restore to the original texture by running 'ripent.exe -deleteembeddedlightmaps [mapname]'.</p>
+				<p>Included 64-bit version of hlrad.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Now all temporary intermediate files are automatically deleted after hlbsp. The only intermediate files that won't be deleted are .prt file, .wa_ file and .ext file. The prt file is required by hlvis and the wa_ and ext file are required by hlrad. They are not deleted so that you can recompile hlvis or hlrad after an entity update (hlcsg '-onlyents').</p>
+				<p>Fixed a bug in wad auto detection.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="vhlt31"></a>Version 31</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Changed the default value of '-blur' from 1.0 to 1.5. This value is chosen to achieve a balance between eliminating staircase effect and preserving lightmap detail. If you want to return to the old look of lightmap, compile hlrad with the parameter '-blur 1.0'.</p>
+				<p>Added the feature of preserving lightmap color of overly bright spots. If you are mapping for another engine, you may want to change the default limit threshold which is 188. The command line parameter is '-limiter #'. For Trinity Render, use '-limiter 255'. For Spirit of Half-Life, no change is needed, since it renders the lightmap identically to Goldsrc.</p>
+				<p>Improved the smoothness of lighting. Now the boundary between two adjacent faces is hardly noticable, and it can be completed eliminated if the texture of two faces can "connect" with each other. This may have a slight impact on the compile time.</p>
+				<p>Added a new parameter '-drawnudge' which will mark the borders of a smooth area, so that the mapper will know which of the edges are smoothed.</p>
+				<p>Add an entity 'info_angularfade' to give textures a metal like look.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Fixed two bugs that occasionally cause errors in FixBrinks.</p>
+				<p>Optimized bsp splitting. Now the amount of leaves, nodes and clipnodes can reduce by 2%-10%, under the condition that '-maxnodesize' is in its default value.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Provided a solution to the cliphull problem of the top of the ramp in surf maps.</p>
+				<p>Raised MAX_KEY (the maximum length of a key in an entity) from 32 to 128.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">zhlt.wad</th>
+			<td>
+				<p>Changed the appearance of the textures in zhlt.wad. For most of the textures which are not commonly used, they have a 64x64 image which can briefly illustrate their usage and function.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="vhlt30"></a>Version 30</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Improved the effect of texture lights. There will be no more bright spots near the texture light. The compile time will not increase much, unless the textures are very strangely aligned. This feature also reduces the compile time in '-extra' mode (which should be used for final compile), because without this feature, hlrad must divide 'texchop' by 2 to compensate for the bright spots. To disable this feature, use the parameter '-noemitterrange' for hlrad. This parameter also disables the fixing of darkness at corners.</p>
+				<p>Added 'color' key in light_surface, which replaces the color of texture that emits texture light, when the value of 'color' is not empty. By default, each texture light face takes the brightness that is defined in 'light_surface' or 'info_texlights' or 'light.rad', and then emits to surroundings a combination of its brightness and the color of its texture. But sometimes, it is not satisfactory to use the color of its texture as the color of texture light. Now, the 'color' key in the light_surface allows you to replace the color of the texture and define the color of texture light. Note that this 'color' is different from the r g b components that can be found in the brightness of light entities or texture lights: Firstly, when 'color' is set, the color of the texture will be discarded. Secondly, the value of this 'color' is in the same space of texture colors, which is more powerful than the r g b brighness components of lights. Just like texture colors, this 'color' is tuned by the value of '-texreflectgamma' and '-texreflectscale'. In fact, if this 'color' equals to the color of the texture, then the emitted texture light is the same.</p>
+				<p>Fixed the darkness of bounced light at corners, which makes the map look much cleaner. This darkness can be noticed when the texture color is bright and the face at the corner happens to be very thin (either the original face is thin, or it is the result of bsp clipping).</p>
+				<p>Added an option to blur the lightmap, which will lessen Goldsrc's blocky look of shadows. To use this feature, add '-blur #' to hlrad's parameters. '#' should be a number larger than 1.0.</p>
+				<p>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Improved the speed of hlbsp. Now hlbsp compiles very fast even if the map is extremely complicated.</p>
+				<p>Improved the culling of the func_detail's visibility, which will slightly benefit fps.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Reduced the possibility of causing invisible face problem.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="vhlt29"></a>Version 29</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Fixed a bug that causes "Error: CollectBrinks_r: not leaf" in the brink function of v28.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="vhlt28"></a>Version 28</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Removed the need to edit 'settings.txt' when installing the compiler. A file 'mapname.wa_' will be created by hlcsg, containing all textures that hlrad will load. If the 'mapname.wa_' is not present, you can still use '-waddir' to load textures.</p>
+				<p>Removed the request for entity order when using 'zhlt_usemodel' feature. Now the entity order will be adjusted by the compiler. The entity that contains the 'zhlt_usemodel' key will be moved backwards on the entity list, so that when the map is loaded into game, it spawns later than the entity referred by 'zhlt_usemodel'.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Fixed "brink" bugs. Brink bugs happens when a player walks along a wall and gets blocked at the corner. The cause is that at least three planes coincide at the line where the player is blocked, which confuses the engine. The fix of brink bugs will increase the amount of clipnodes by about 1%-5%. To disable this feature, add '-nobrink' to hlbsp's parameters.</p>
+				<p>Added clipnode merging to reduce the amount of clipnodes by about 1%-5%. This function moves the clipnodes that have the same data into the same index. To disable this feature, add '-noclipnodemerge' to hlbsp's parameters.</p>
+				<p>Added a line that displays all required wad files in the report of bsp file information.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Corrected the default value of '-texreflectgamma' and '-texreflectscale'. To keep coherent with the engine, the default '-texreflectgamma' has changed to 1.76, which means that the bounced light and texture lights will be less colored. At the same time, default '-texreflectscale' has changed from 1.0 to 0.7, so that the bounced light and texture lights won't be too bright.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">RIPENT</th>
+			<td>
+				<p>Changed ripent's texture function to having a seperated set of parameters. Use '-textureexport' or '-textureimport' to extract or update textures in the bsp file. Use '-textureparse' at the same time to switch to the more friendly output format.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="vhlt26"></a>Version 26</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Add fast mode for hlrad. Its command line option is '-fast'.</p>
+				<p>Add the spread angle for light_environment, which generates soft shadows for the sun.</p>
+				<p>Add a new texture 'black_HIDDEN', which is invisible but can be used to correct the lighting of models whose center are above this texture.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Revert the support for 'wad.cfg' Now the '-wadconfig' loads a group inside 'wad.cfg' while '-wadcfgfile' loads a seperated file. They can not be used at the same time.</p>
+				<p>Improved the clipnode for 'precise' cliptype. The previous algorithm can create extremely small seams in cliphull when '-cliptype precise' is specified. This kind of seam will often causes 'Ambiguous leafnode contents' warning, and sometimes even causes invisible walls and holes.</p>
+				<p>Added a line that displays all required wad files in the report of bsp file information.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLVIS</th>
+			<td>
+				<p>Fixed hlvis's crash when '-maxdistance' is set.</p>
+				<p>Added a feature in hlvis to deal with the visibility problem of models which are used as "skybox". Sometimes very large models (.mdl files) are placed in the map as background objects such as mountains or dynamic skies, but the main drawback is that the model may sometimes disappear. This is because the center of the model is beyond the visible region and therefore optimized by hlvis. To solve this, place an 'info_overview_point' entity in the same place as the center of the model, open its properties and select 'Reversed', then enclose the entity with a hollowed solid cube so that it won't affect the visibility of anywhere else. The 'info_overview_point' entity with 'Reversed' option on will make a place visible from everywhere in the map.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">RIPENT</th>
+			<td>
+				<p>Disable the export and import of texture data of ripent by default, because if the texture data of a map has changed you will not be admitted when joining a server running with the original map, and ripent may cause existing wad files to be overwritten when exporting the wad file. To enable it, use the '-texture' parameter together with '-export' or '-import'.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">Compiler</th>
+			<td>
+				<p>Include a project file for Visual Studio 2005.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="vhlt25"></a>Version 25</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Add 'AllocBlock' amount report for '-chart'.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Improve hlrad's ability to handle the case of too many dynamic light styles on a face.</p>
+				<p>Fix the issue of water brushes leaking light. This only affects world brushes with liquid texture. This doesn't affect func_water.</p>
+				<p>Fix the bug that the surface of func_water only emits texture light upwards and fails to emit texture light downwards.</p>
+				<p>Opaque entities that are beyond sky brushes will not cast shadows.</p>
+				<p>The light_surface entity may automatically determine whether the texture light uses fast mode according to its brightness and the '-dlight' parameter.</p>
+				<p>Remove hlrad's '-maxlight' parameter because it is useless and a little uncompatible with dynamic light styles.</p>
+				<p>Change hlrad's default '-gamma' from 0.5 to 0.55 and default '-texreflectgamma' from 2.5 to 2.2. These values are more suitable for Half-Life's default gamma value for lighting and texture and Windows's gamma value.</p>
+				<p>Change hlrad's default vismatrix method to sparse, because sparse is often a must for large maps. The parameters for each vismatrix methods have been changed to '-vismatrix sparse', '-vismatrix normal' and '-vismatrix off'. (But you can still use the old '-sparse' or '-nomatrix')</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP<br>HLCSG<br>HLVIS</th>
+			<td>
+				<p>Add 'func_detail' entity, which is similar in function to the func_detail in Source.</p>
+				<p>Remove the old weird and buggy way how hlbsp deals with HINT texture.</p>
+				<p>When CLIP texture is used together with normal textures, which is not allowd before this update, the brush will act like a CLIP brush.</p>
+				<p>Add 'SOLIDHINT' texture which can help create better BSP structure for terrain and other complicated shapes.</p>
+				<p>Change the condition of MAX_MAP_LEAFS warning.</p>
+				<p>Increase the limit of different textures from 512 to 4096.</p>
+				<p>Replace the 'wad.cfg' system with a new way of configuring wad list.</p>
+				<p>All 'aaatrigger' texture will automatically become invisible.</p>
+				<p>Fix the broken '-nullfile' parameter.</p>
+				<p>Increase the limit of visibility data size.</p>
+				<p>'-wadcfgfile', '-hullfile' and '-nullfile' will not require full path.</p>
+			</td>
+		</tr>
+			<tr>
+			<th>Compiler</th>
+			<td>
+				<p>The tools are now compiled by Visual Studio 2010.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="vhlt23"></a>Version 23</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Now light bouncing and texture light are influenced by texture color.</p>
+				<p>The reflectivity for 255white texture is 1.0 . Change with '-texreflectscale #'.</p>
+				<p>The gamma value that relates reflectivity to texture color is 2.5 . Change with '-texreflectgamma #'.</p>
+				<p>Also fixed some bugs in light bouncing between entity and changed default bounce to 8 times.</p>
+				<p>Now shadows from textures beginning with { are casted according to the opaque area of texture.</p>
+				<p>Since hlrad needs texture data, wad pathes have to be provided. This can be done by editing the file 'settings.txt' and replace the 'C:\Half-Life\xxx' after '-waddir' with wad folders of your game. Disable texture data loading with hlrad parameter '-notextures'.</p>
+				<p>New translucent effect for materials such as fabric, coarse glass, plastic. They are now able to receive light that comes from the back side of the face.</p>
+				<p>Provide a convenient way of creating texture lights.</p>
+				<p>Stop black areas in opaque entities from leaking out, in faces that intersect with opaque entities. Disable this feature with hlrad parameter '-blockopaque 0'.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Fixed some errors in hlbsp.</p>
+				<p>Ensure faces in func_group cover world faces when they overlap.</p>
+				<p>Improved bsp process to prevent some epsilon problem.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="vhlt20"></a>Version 20</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Improved the quality of diffuse light from light_environment. There will be no more strange pattern casted from windows into rooms. Disable with rad parameter '-softsky 0'.</p>
+				<p>New samples position calculation and bounced light smoothing code. Also correct the precision of .p0/.p1/.p2/.p3 file and tjunc process. Seam between adjacent faces in the same plane are now almost invisible.</p>
+				<p>Now optimizes light entities to reduce number of edicts used by named lights in game. Duplicated light names will be removed. Disable with csg parameter '-nolightopt'.</p>
+				<p>Optimized patch (sample of bounced lighting) placing. Number of patches now decreases about 20%. Surprisingly, lighting quality gets better.</p>
+				<p>Fixed a bug that causes the first face lacking of bounced lighting.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP<br>HLCSG<br>HLVIS</th>
+			<td>
+				<p>Speeded up opaque entity. It is now based on BSP structure and is really fast.</p>
+				<p> Added a new nonsolid type of brush. The content of a brush will be removed if any face is textured with 'SKIP'. Thus you can build a single face without chopping chunks out of overlapping brushes. As a result, SKIP+HINT does not split intersecting brushes anymore. However, using SKIP+NULL instead of SKIP+HINT is recommended, since HINT splits the world in highest priority, which might not be effective.</p>
+				<p>Fixed a bug that causes "Warning: Leaf portal saw into leaf" and wrong vis.</p>
+				<p>Increased MAX_MAP_LEAFS from 8192 to 32760. The only strange effect that I have noticed is that some leafs are invisible when the map is being viewed from outside.</p>
+				<p>Increased MAX_LEAF_FACES from 1024 to 16384, so the compiler will not hit this internal limit.</p>
+				<p>Now optimizes texture alignment data and texture data. Textures that are not referred by any visible faces after bsp process, such as CLIP, SKIP and NULL, will be removed from bsp file.</p>
+				<p>Now removes visible faces other than 'sky' inside sky brushes.</p>
+				<p>Now removes backside surface of func_water which is also visible in HL by mistake and affects fps.</p>
+				<p>Now removes wad pathes from wad names.</p>
+				<p>Allow func_group to be noclip (passable) according to its 'zhlt_noclip' key.</p>
+				<p>Improved the order of bsp splitting. Number of nodes, clipnodes, leafs and portals decreases about 5%.</p>
+				<p>Added a way of setting the bound of entities manually, so you can customize the size of a func_pushable. Use 'BoundingBox' texture in the same way of creating an origin.</p>
+				<p>Added support for entity with only CLIP brushes or even with no brushes. Note that this feature will create a .hsz file.</p>
+				<p>Now automatically detects and fills all areas where no entities exist. That is to remove faces in spaces that hide between solid brushes due to carelessness. Disable with bsp parameter '-noinsidefill' if you prefer filling them manually.</p>
+				<p>Fixed a bug that causes overlapping brush faces in entities not to be removed.</p>
+			</td>
+		</tr>
+	</table>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="vhlt17"></a>Version 17</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed a bug in plane type that causes problem with nodes such as invisible walls and holes and black faces.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed a bug that causes water brushes in entities which have more than one brushes to be weird.</p>
+				<p>Fixed a bug in bounced light triangulation that causes lighting at face edges to be discontinuous.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="vhlt16"></a>Version 16</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Calculate angle of light_environment which has 'pitch' or 'target' when writing to bsp, and set it to key 'angles', so it can be correctly recognized in the game. If you are using switchable or multiple light_environment, you can use entity info_sunlight(which will create a light_environment at end of entity list) to set angle and brightness manually.</p>
+				<p>You can use '-smooth2 #' to set a smaller smoothing threshold for faces that are adjacent but have different textures.</p>
+				<p>Smoothing quality is enhanced. It calculates normals for every vertex. </p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLVIS</th>
+			<td>
+				<p>You can make all other vis leafs visible from a vis Leaf by placing an info_overview_point entity inside it. Useful for creating overview.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG/HLBSP</th>
+			<td>
+				<p>You can assign areas that need to generate clip hulls, to reduce clipnode count. Achieved via the info_hullzone entity.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">RIPENT</th>
+			<td>
+				<p>You can use ripent.exe to export and import texture data (when -parse is off)/ texture list and included textures (when -parse is on).</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="vhlt13"></a>Version 13</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added entity 'light_shadow' to dynamically control the opacity of brush entity.</p>
+				<p>Fixed duplicate water texture for entity.</p>
+			</td>
+		</tr>
+	</table>
+
+	<h2><a id="zhlt3"></a><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 3 series</h2>
+	<p>These tools are built upon the <a href="#p-series">final source code of <span class="notranslate">XP-Cagey</span>'s p series (p15.5)</a>.</p>
+
+	<p>The 64-bit version is the same code as the <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 3.4 64-bit beta version.</p>
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="3.4_final"></a>Version 3.4 final</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added a fix for <span class="notranslate">env_sky</span> for <a href="http://spirit.valve-erc.com/" rel="external">Spirit of Half-Life</a> (new the 32-bit version, as this was already included in <a href="#3.4_64"><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 3.4 64-bit beta</a>).</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="3.4_64"></a>Version 3.4 (64 bit beta)</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>First release of <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 3 for 64-bit processors.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added a fix for <span class="notranslate">env_sky</span> for Spirit of Half-Life.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="3.3"></a>Version 3.3</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed some long-standing crash bugs.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed all known crashes when using <a href="entity-changes.html#zhlt_lightflags" class="notranslate">zhlt_lightflags</a>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed a crash when using the <a href="entity-changes.html#zhlt_customshadow" class="notranslate">zhlt_customshadow</a> flag.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>PACKAGE</th>
+			<td>
+				<p>Removed all non-SDK Power tools as keeping the tools up to date was/will be a pain.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>DOCS</th>
+			<td>
+				<p>All documents now point to <a href="http://zhlt.info/">http://zhlt.info</a>.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="3.2.1.1"></a>Version 3.2.1.1</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Various cosmetic fixes, such as giving the tools version 3.2.1(.1).</p>
+			</td>
+		</tr>
+		<tr>
+			<th>PACKAGE</th>
+			<td>
+				<p>Moved the <span class="notranslate">.pl</span> files for <span class="notranslate">opt_entdata</span> to live in the power tools folder, as they should have.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="3.2.1"></a>Version 3.2.1</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Removed support for the <a href="special-textures.html#hintskip" class="notranslate">HINTSKIP</a> texture. Support for this functionality has now been sent to the makers of <span class="notranslate">GTKRadiant</span> as a feature request instead.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="3.2"></a>Version 3.2</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Fixed a problem with the <a href="special-textures.html#hintskip" class="notranslate">HINTSKIP</a> texture appearing in the world (i.e. being rendered rather than discarded as it should have been).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Included the correct <span class="notranslate">hlrad.exe</span> file (due to an error the wrong version of this file was included in the previous build).</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="3.1"></a>Version 3.1</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Added support for the <a href="special-textures.html#hintskip" class="notranslate">HINTSKIP</a> texture for <span class="notranslate">GTKRadiant</span> users to hide group <a href="special-textures.html#hint" class="notranslate">HINT</a> brushes. Simply apply it as a group texture (idea by DeeKae).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed some serious crash bugs present in <a href="#3.0final"><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 3.0</a>.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="3.0final"></a>Version 3.0 Final</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed primary colour bug with <span class="notranslate">light_env</span>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed Infinite v bug when using odd-sided texture lights.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed black blotches, when infinite v would spam.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed <span class="notranslate">Out Of World</span> errors when the brushes where in fact proper solids.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">OPT_ENTDATA</th>
+			<td>
+				<p>Officially added <span class="notranslate">FragBait0</span>'s <span class="notranslate">opt_entdata</span> tool to the <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> toolset (this is located in the Power Tools folder).</p>
+			</td>
+		</tr>
+		<tr>
+			<th>NEW TOOLS</th>
+			<td>
+				<p>Unofficially added <span class="notranslate">hlfix</span>, <span class="notranslate">makewad</span>, <span class="notranslate">mapbackup</span> and <span class="notranslate">RESGen</span> (these are located in the Power Tools folder).</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="3.0beta4"></a>Version 3.0 Beta 4</td>
+		</tr>
+		<tr>
+			<td class="span-note" colspan="2">
+				<p>Please note that this version of the tools contains free code by <span class="notranslate">NVIDIA</span> Corporation LLC.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Added <span class="notranslate">zhlt.wad</span> - this version fixes some issues when using a texture with capital letters.</p>
+				<p>Added <span class="notranslate">lights.rad</span> - from Hammer 3.4</p>
+				<p>Added <a href="using-wad.cfg.html" class="notranslate">wad.cfg</a> - from <a href="#mhlt1.7" class="notranslate">Merl's Custom Build 1.7</a></p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Started converting some functions to assembly code, to help make the code as fast as possible.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG/HLBSP</th>
+			<td>
+				<p>Cleaned up some tab spacing, so that built in command line options are displayed properly.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed crash bug when using opaque entities.</p>
+			</td>
+		</tr>
+			<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Faster RAD code by <span class="notranslate">Nem</span>, which improves RAD complie times by about 15-27%.</p>
+			</td>
+		</tr>
+			<tr>
+			<th class="notranslate">RIPENT</th>
+			<td>
+				<p>New code by <span class="notranslate">Nem</span> added the following options: <a href="command-reference.html#shared-chart" class="notranslate">-chart</a> <a href="command-reference.html#shared-noinfo" class="notranslate">-noinfo</a> <a href="command-reference.html#shared-lightdata" class="notranslate">-lightdata</a> <span class="notranslate">-parse</span>.</p>
+				<p><span class="notranslate">-chart, -noinfo &amp; -lightdata</span> are self explanatory.</p>
+				<p>On <span class="notranslate">-export</span>, the <span class="notranslate">-parse</span> option parses the entity data and reformats it for easy reading in any text editor.</p>
+				<p>On <span class="notranslate">-import</span>, the <span class="notranslate">-parse</span> option parses the entity data and removes all unnecessary white space. The parsing operation also works as a means to insure that the entity data is well formed, if it isn't an error message is printed to help track down the problem.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="3.0beta3"></a>Version 3.0 Beta 3</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>This version was a test, for including the <span class="notranslate">MSVC.lib</span> code. It did not work, so was withdrawn after a small internal beta test.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="3.0beta2"></a>Version 3.0 Beta 2</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Added <span class="notranslate">AJenbo</span>'s CSG code so that	the default subdivision is 240 for both fitted and tiling textures, which saves about 1.5% <span class="notranslate">wpoly</span>.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="3.0beta1"></a>Version 3.0 Beta 1</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Made the Banner look clean, and updated the Credits.</p>
+				<p>Added an extra line, to the Bug Reports Banner, stating that if you have a mapping error, to ask at the modifications 'Nominated Mapping Help Forum', to help new mapmakers.</p>
+				<p>Updated the compile error reference code to show <span class="notranslate">Tommy14</span>'s Error Page that is much more comprehensive then the standalone <span class="notranslate">ZHLTProblems.html</span>.</p>
+				<p>Tweaked tool's complier optimising.</p>
+				<p>Destroyed ALL errors at <span class="notranslate">/w3</span> level compiles</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLVIS</th>
+			<td>
+				<p>Added faster Vis code, by <span class="notranslate">Egir</span>. Tested on a variety of <span class="notranslate">AMD</span> processors, but not tested on <span class="notranslate">Intel</span> chips or older cpus.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed <a href="command-reference.html#hlrad-extra" class="notranslate">-extra</a> flag bug in <span class="notranslate">light_env</span> from <span class="notranslate">XP-Cagey</span> p15, making the environment lighting brighter.</p>
+				<p>Added a partial hack for <span class="notranslate">env_sprite</span>'s to cast shadows - idea by <span class="notranslate">DNV-Cross</span>.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2><a id="p-series"></a><span class="notranslate">XP-Cagey</span>'s p series</h2>
+	<p>These tools are built upon the <a href="#mhlt">final build of <span class="notranslate">Merl</span>'s tools (Custom Build 1.7)</a>.</p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p15.5"></a>Version 1.7p15.5 (source code only release)</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Some further bugfixing and simple optimisations.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p15"></a>Version 1.7p15</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Fixed new file handler behavior when asked for a directory's local filename to match pre-p14 behavior.</p>
+				<p>Fixed "<a href="command-reference.html#shared-chart" class="notranslate">-chart</a>" output to display percentage of final plane count instead of internal plane count.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Added a "<a href="command-reference.html#hlbsp-noopt" class="notranslate">-noopt</a>" switch that turns off automatic plane optimization on BSP write. This allows <span class="notranslate">HLBSP</span> to be run multiple times without rerunning <span class="notranslate">HLCSG</span>.</p>
+				<p>Fixed incorrect size for valid face array that was causing crashes when maps used over 64K planes internally.</p>
+				<p>Fixed display of <span class="notranslate">SolidBSP</span> times.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed incorrect self-shadowing on opaque brush entities.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p14"></a>Version 1.7p14</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Embedded planes optimizer that now runs automatically as the BSP is written to file.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added "<a href="command-reference.html#hlrad-nodynbounce" class="notranslate">-nodynbounce</a>" switch that prevents dynamic light styles (variable brightness or switchable) from bouncing, greatly reducing the overall amount of <span class="notranslate">lightdata</span> on some maps. This was standard behavior before <a href="#mhlt1.7"><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 1.7</a>. The default behavior matches that of <a href="#p13"><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> p13</a>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Fixed an issue with building maps under a directory which contains a &quot;.&quot; character. This affected building from the Steam install directory.</p>
+				<p>Increased internal planes limit to 256K. Reduced post-optimization planes limit to 32K to match the Half-Life engine's maximum.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>DOCS</th>
+			<td>
+				<p>The documents from all previous releases have been integrated into a single set by <a href="http://ianmacfarlane.com/" class="notranslate" rel="author">Ian 'Reve' Macfarlane</a>.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p13"></a>Version 1.7p13</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Huge performance gains with custom shadow code. Submitted by <span class="notranslate">hullu</span>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed problem with <a href="entity-changes.html#info_compile_parameters" class="notranslate">info_compile_parameters</a> code that turned off clip hulls by default.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Fixed incorrect storage of empty clip hulls - the head node pointer now correctly stores the content type instead of a pointer to another model's clip information; this allows <a href="entity-changes.html#zhlt_noclip" class="notranslate">zhlt_noclip</a> to work correctly in all cases, and also allows maps created with clip hulls turned off to run in the game without crashing.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Fixed crash error resulting from running <span class="notranslate">HLCSG</span> with <span class="notranslate">nocliphull</span> followed by running <span class="notranslate">HLBSP</span> normally.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Changed the <a href="entity-changes.html#zhlt_noclip" class="notranslate">zhlt_noclip</a> and <a href="entity-changes.html#zhlt_invisible" class="notranslate">zhlt_invisible</a> attributes' behavior: if either attributes' value is set to '0', the attribute is ignored. This should allow people to add these attributes to <span class="notranslate">FGD</span> files as Choices.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Simplified bevel clip algorithm used by precise, normalized, and simple clip types (thanks to <span class="notranslate">Carsten Fuchs</span> for pointing out the change).</p>
+			</td>
+		</tr>
+		<tr>
+			<th>DOCS</th>
+			<td>
+				<p>Bundled docs from <a href="#zhlt2.5.3"><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 2.5.3</a> and <a href="#mhlt1.7"><abbr title="Merl's Half-Life Tools" class="notranslate">MHLT</abbr> 1.7</a> in their original formats.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p12"></a>Version 1.7p12</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed issue introduced with <a href="#p11">p11</a> that caused some lights to fade incorrectly over distance.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Removed "<span class="notranslate">SDF::4</span>" log message that would spam in production builds of the tools if concave opaque entities were in use.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Default maximum <span class="notranslate">lightdata</span> bumped down to 6MB again after reports that higher values caused performance issues. Authors still have the <a href="command-reference.html#shared-lightdata">option of specifying extra <span class="notranslate">lightdata</span></a> at the command line, but should perform compatability testing before releasing their maps if they're over the preset limit.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p11"></a>Version 1.7p11</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added <a href="command-reference.html#shared-lightdata" class="notranslate">-lightdata &lt;#&gt;</a> switch to allow user to set custom <span class="notranslate">lightdata</span> maximum value. Works like the <a href="command-reference.html#shared-texdata" class="notranslate">-texdata</a> switch. Default maximum <span class="notranslate">lightdata</span> amount bumped to 8MB.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Enhanced "<span class="notranslate">too many lightstyles</span>" error messages that previously showed <span class="notranslate">(?,?,?)</span> to show actual location of error. Only first error of this type is shown by default. Use <a href="command-reference.html#shared-verbose" class="notranslate">-verbose</a> to see all occurrences.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Plugged buffer overflow when too many light samples are used (new <span class="notranslate">Exceeded MAX_MAP_LIGHTING</span> error).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP/HLVIS/HLRAD</th>
+			<td>
+				<p>Plugged buffer overflow on BSP read when <span class="notranslate">texdata</span> or <span class="notranslate">lightdata</span> wasn't adequate to hold texture data stored in BSP (<span class="notranslate">MAX_MAP_MIPTEX</span> or <span class="notranslate">MAX_MAP_LIGHTING</span> thrown now instead).</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p10"></a>Version 1.7p10</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed problem with opaque entity shadows; p10 lighting is now identical to the lighting in <a href="#mhlt1.7"><span class="notranslate">Merl</span>'s 1.7 Custom Build</a>.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p9"></a>Version 1.7p9</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed math code introduced in <a href="#p5">p5</a> - removed &quot;<span class="notranslate">-oldmath</span>&quot; and replaced added a message saying the option is no longer supported if someone attempts to use it.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Added support for older hullfile format used in HL SDK 2.2 (doesn't affect anyone using the newer hullfile format). Patch by <span class="notranslate">Nemo1024</span>.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p8"></a>Version 1.7p8</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added command line switch "<span class="notranslate">-oldmath</span>" for people who are having problems with the optimized math routines introduced in p5. I'm currently looking for sample cases where the new math routines break the lighting stage of the compile.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p7"></a>Version 1.7p7</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Re-added support for texlights (had been disabled while debugging due to spam of &quot;<span class="notranslate">direct lights exceeded</span>&quot; message), changed behavior of that message from print on every occurance to print on first occurance - if you had problems with this message spamming before, you should now be able to at least compile your map. The problem causing the message has not been fixed, but getting it many times isn't more useful than getting it once because it doesn't define the location of the problem.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p6"></a>Version 1.7p6</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG/HLBSP</th>
+			<td>
+				<p><a href="special-textures.html#bevel"><span class="notranslate">BEVEL</span> texture</a> code was causing improper clip offsets for normally textured axial faces.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p5"></a>Version 1.7p5</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Added a new <a href="entity-changes.html#zhlt_noclip" class="notranslate">zhlt_noclip</a> flag. Adding this key with a non-empty value to any brush entity will cause ALL clipping information for the brush entity to be stripped, making the entity non-solid in the game. Suggested by <span class="notranslate">Yamazaki</span>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>HLCSG</th>
+			<td>
+				<p>Added a new <a href="entity-changes.html#zhlt_invisible" class="notranslate">zhlt_invisible</a> flag. Adding this key with a non-empty value to any brush entity will cause the entity to be invisible in the game and not contribute to <span class="notranslate">r_speed</span> values (this is the same as using the <a href="special-textures.html#null"><span class="notranslate">NULL</span> texture</a> for the entire entity).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG/HLBSP</th>
+			<td>
+				<p>Wrote in support for <a href="special-textures.html#bevel"><span class="notranslate">BEVEL</span> texture</a> - this texture acts like a <a href="special-textures.html#null"><span class="notranslate">NULL</span> texture</a> but also doesn't expand when generating clip hulls. Can be used to eliminate exterior corner clipping bugs without using &quot;<a href="command-reference.html#hlcsg-cliptype" class="notranslate">-cliptype precise</a>&quot; (although &quot;<a href="command-reference.html#hlcsg-cliptype" class="notranslate">-cliptype precise</a>&quot; is still the recommended method for removing clipping errors, as this feature is experimental). The <a href="special-textures.html#bevel"><span class="notranslate">BEVEL</span> texture</a> has been added to the <span class="notranslate">zhlt.wad</span> file. Suggested by <span class="notranslate">WolfWings</span>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Increased <span class="notranslate">MAX_MAP_BRUSHES</span> (the maximum number of brushes in the map) from 8K to 32K. Suggested by <span class="notranslate">A W!seM4n Onc3 Sa!d</span>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">RIPENT</th>
+			<td>
+				<p>Updated to support the higher map limits of this release.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p><span class="notranslate">HLRAD</span> optimized. Testing showed a ~5% improvement on compiles that weren't using virtual memory. Larger gains are probably possible in the future.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Enabled <abbr title="Microsoft Visual C++" class="notranslate">MSVC++</abbr> compiler optimizations for speed. Your milage may vary.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p4"></a>Version 1.7p4</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Recursive threadlock on multiprocessor machines eliminated.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Using full dot product to check for angle instead of sum of axial values.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p><a href="command-reference.html#hlcsg-cliptype" class="notranslate">-cliptype normalized</a> uses bugfix 1 and skips bugfix 2 for people who don't want denormalized brushes (see article link below for details).</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p3"></a>Version 1.7p3</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Reworked the <span class="notranslate">ExpandBrush</span> function of <span class="notranslate">HLCSG</span> to fix 2 bad assumptions that led to "sticky" exterior corners. Use the <a href="command-reference.html#hlcsg-cliptype" class="notranslate">-cliptype</a> switch to use the different versions of this clipping mode.</p>
+				<!-- <p>A summary of how this works can be found at <a href="http://xp-cagey.com/?article=1000" rel="external nofollow">http://xp-cagey.com/?article=1000</a></p> -->
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Sped up the <span class="notranslate">CreateBrush</span> part of <span class="notranslate">HLCSG</span> by around 75%.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p><span class="notranslate">Lightdata</span> over the limit caused silent buffer overflow.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p2"></a>Beta 1.7p2 (never publicly released)</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Increased internal <span class="notranslate">lightdata</span> maximum from 4MB to 6MB.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="p"></a>Beta 1.7p</td>
+		</tr>
+		<tr>
+			<th class="notranslate">OPT_PLNS</th>
+			<td>
+				<p>Added the <span class="notranslate">opt_plns</span> tool to remove redundant planes from maps.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Increased internal planes limit from 32K to 64K. Maps with over 32K planes require <span class="notranslate">opt_plns</span> to render correctly in game.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2><a id="mhlt"></a><span class="notranslate">Merl</span>'s custom build</h2>
+	<p>These tools are built upon the <a href="#zhlt">final build of <span class="notranslate">Zoner</span>'s tools (version 2.5.3)</a>.</p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="mhlt1.7"></a>Version 1.7</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Integrated code from <span class="notranslate">Laurie Cheers</span> &lt;<a href="mailto:laurie@valve-erc.com" class="notranslate">laurie@valve-erc.com</a>&gt; for switchable texture based lighting.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Integrated code from <span class="notranslate">Jussi Kivilinna</span> for semi-transparent brush based entity shadowing.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Increased maximum subdivide value to 512. You may now specify a value using the <a href="command-reference.html#hlbsp-subdivide" class="notranslate">-subdivide</a> parameter other than 240.</p>
+				<p>WARNING: Doing so may cause problems in software mode. If in doubt, leave at the failsafe default value of 240.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>???</th>
+			<td>
+				<p>Updated <a href="entity-changes.html#info_compile_parameters" class="notranslate">info_compile_parameters entity</a> to not use any spawnflags.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>DOCS</th>
+			<td>
+				<p>Updated <span class="notranslate">instructions.html</span> and fixed micellaneous spelling errors.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="mhlt1.6.1"></a>Version 1.6.1</td>
+		</tr>
+		<tr>
+			<th>???</th>
+			<td>
+				<p>Fixed issue of all <a href="special-textures.html#null"><span class="notranslate">NULL</span> textured</a> brush mysteriously disappearing &lt;<a href="mailto:merkaba@onthebog.net" class="notranslate">merkaba@onthebog.net</a>&gt;</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="mhlt1.6"></a>Version 1.6</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLVIS</th>
+			<td>
+				<p>Included <span class="notranslate">Zipster</span>'s max vis distance.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Included fix by <span class="notranslate">hullu</span> for <a href="using-wad.cfg.html" class="notranslate">wad.cfg</a> on *nix systems</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>All tools now support <a href="entity-changes.html#info_compile_parameters" class="notranslate">info_compile_parameters entity</a>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Included <span class="notranslate">HLRAD</span> support for <a href="entity-changes.html#info_texlights" class="notranslate">info_texlights</a> entity.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Included various <span class="notranslate">HLRAD</span> features from <span class="notranslate">Adam Foster</span> &lt;<a href="mailto:afoster@compsoc.man.ac.uk" class="notranslate">afoster@compsoc.man.ac.uk</a>&gt;</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="mhlt1.5.2"></a>Version 1.5.2</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed issue of last <span class="notranslate">wadpath</span> ignorance when using mapfile <span class="notranslate">wadpath</span>s (<span class="notranslate">AmericanRPG</span>).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed issue of ÿ interfering with <a href="using-wad.cfg.html" class="notranslate">wad.cfg</a></p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p><a href="using-wad.cfg.html" class="notranslate">wad.cfg</a> should now work from the directory the tools are installed to.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="mhlt1.5.1"></a>Version 1.5.1</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed <a href="common-mapping-problems.html#mixed_face_contents" class="notranslate">Mixed Face Contents</a> error bug when using <a href="special-textures.html#null" class="notranslate">NULL</a> with water textures &lt;<a href="mailto:alex.taylor3@ntlworld.com" class="notranslate">alex.taylor3@ntlworld.com</a>&gt;.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Attempted fix of compile log output not having linebreaks.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="mhlt1.5"></a>Version 1.5</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Re-wrote support for <a href="using-wad.cfg.html" class="notranslate">wad.cfg</a> file.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed issue of <span class="notranslate">hlcsg.exe</span> crashing under <span class="notranslate">Win2k</span> with a custom wad configuration.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Wrote in support for <a href="command-reference.html#hlcsg-wadautodetect">automatic wad detection</a>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Included <span class="notranslate">Adam Foster</span>'s &lt;<a href="mailto:afoster@compsoc.man.ac.uk" class="notranslate">afoster@compsoc.man.ac.uk</a>&gt; Sky Diffuse hack.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="mhlt1.4"></a>Version 1.4</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Wrote in support for the multiple wad configuration file (<a href="using-wad.cfg.html" class="notranslate">wad.cfg</a>). Consult <span class="notranslate">instructions.html</span> for a detailed usage guide to this feature.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="mhlt1.3"></a>Beta 1.3</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Wrote in support for clipnode economy mode, can be turned off with <a href="command-reference.html#hlcsg-noclipeconomy" class="notranslate">-noclipeconomy</a></p>
+				<p>The following will not generate clipnodes:</p>
+				<ul>
+					<li><span class="notranslate">func_illusionary</span></li>
+					<li><span class="notranslate">func_train</span> or <span class="notranslate">func_tracktrain</span> with flag 4 set (not solid)</li>
+					<li><span class="notranslate">func_conveyor</span> with flag 2 set (not solid)</li>
+					<li><span class="notranslate">func_rot_button</span> with flag 1 set (not solid)</li>
+					<li><span class="notranslate">func_rotating</span> with flag 7 set (not solid)</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="mhlt1.2"></a>Beta 1.2</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG/HLBSP</th>
+			<td>
+				<p>Added in <span class="notranslate">-nonulltex</span> command line switch to turn the feature off.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Removed clip face stripping.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed spam debug message.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="mhlt1.1"></a>Beta 1.1</td>
+		</tr>
+		<tr>
+			<th>???</th>
+			<td>
+				<p>Removed <span class="notranslate">Skip</span> texture hack.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG/HLBSP</th>
+			<td>
+				<p>Wrote in functionality for <a href="special-textures.html#null"><span class="notranslate">NULL</span> texture</a>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG/HLBSP</th>
+			<td>
+				<p><span class="notranslate">Clip</span> texture now works in the same fashion as the <a href="special-textures.html#null"><span class="notranslate">NULL</span> texture</a> for backwards compadibility.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2><a id="zhlt"></a><span class="notranslate">Zoner</span>'s Half-Life tools</h2>
+	<p>These tools were modifications of the original <span class="notranslate">Valve</span> compile tools, modified with permission.</p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.5.3"></a>Version 2.5.3</td>
+		</tr>
+		<tr>
+			<th class="notranslate">NETVIS</th>
+			<td>
+				<p>Fixed clients not exiting on unexpected disconnects from the server in some cases. (Primarily affected <span class="notranslate">Linux</span>).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added <a href="command-reference.html#hlrad-nopaque" class="notranslate">-nopaque</a> switch which causes any entities with the opaque <a href="entity-changes.html#zhlt_lightflags" class="notranslate">zhlt_lightflags</a> bit set to be ignored for the compile.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added missing <a href="command-reference.html#hlrad-dscale" class="notranslate">-dscale</a> help to the command line help in <span class="notranslate">HLRAD</span>.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.5.2"></a>Version 2.5.2</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Changed default smoothing threshold for phong shading from 45 to 50.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed overrides of the values light emitting textures with multiple rad files not working properly.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Increased <span class="notranslate">MAX_WVERTS</span> for tjunction remover, as it was sometimes running out of room to do its work.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed condition where the <a href="common-mapping-problems.html#mixed_face_contents" class="notranslate">mixed face contents</a> checks were not checking the last face in a brush correctly.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.5.1"></a>Version 2.5.1</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added a new <a href="entity-changes.html#zhlt_lightflags" class="notranslate">zhlt_lightflags</a> flag, to light up the concave portion of arches correctly. Entities of arches using the opaque setting to block light would tend to get black fringes at the seams. The <span class="notranslate">ConcaveFix</span> flag was created to handle that situation. Its value is 4, and must be combined with the Opaque flag (2) to work. So use the value 6. The <span class="notranslate">ConcaveFix</span> is not compatible with the <span class="notranslate">EmbeddedFix</span>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Fixed precision change which broke some outdoorsy maps as well as some <abbr title="Quake Army Knife" class="notranslate">QuArK</abbr> made maps.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed a bug in csg which caused solid skies and inexplicable shadows to appear in outdoor areas.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Allow <span class="notranslate">SKY</span> texture on any world brush without generating a <a href="common-mapping-problems.html#mixed_face_contents" class="notranslate">Mixed Face Contents</a> error. All the faces inside a 'sky area' should be <span class="notranslate">SKY</span> to help <span class="notranslate">HLRAD</span> out by not having allocate lightmaps for faces inside the sky areas.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Leaks in hulls 1-3 will no longer overwrite leakfiles for hull 0.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.5.0"></a>Version 2.5.0</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Fixed crash in <span class="notranslate">HLBSP</span>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Added proper error message when <span class="notranslate">HLBSP</span> encounters a solid entity with no brushes.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Leak pointfiles are generated now for leaks in the other hulls (1-3).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">RIPENT</th>
+			<td>
+				<p>Fixed a bug where the end of the <span class="notranslate">entdata</span> in imports was sometimes missing the last byte.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Incorporated configure and code patches for compiling and running on 64-bit architectures.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.4.2"></a>Version 2.4.2</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed math precision problem from changeover to C++ in 2.4 which would cause some maps to have degenerate BSP trees (missing faces, random solid areas etc).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Fixed math precision problem from changeover to C++ which caused spurious leaks in a very small number of maps.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.4.1"></a>Version 2.4.1</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Statically linking C and C++ runtime libraries, to remove the requirement of <span class="notranslate">msvcp60.dll</span> needing to be present and installed correctly on machines.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fix the automatic loading of 'mapname.rad' files failing to load in all possible cases.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">NETVIS</th>
+			<td>
+				<p>Workaround for '<span class="notranslate">Socket Error 16</span>' on <span class="notranslate">Linux</span> when running <span class="notranslate">netvis</span> servers in quick succession on the same port.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.4"></a>Version 2.4</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Added the ability to define custom sized bounding boxes for the collision hulls through a command line switch called <a href="command-reference.html#hlcsg-hullfile" class="notranslate">-hullfile</a>. The format is simply three lines containing three numbers of dimensions of the box in x y z format. The default settings are included in a file called <span class="notranslate">default.hull</span> in the <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> distribution. This option is only primarily of interest to mod authors and their mapping team.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Malformed face normal errors now output world coordinates of the error.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">NETVIS</th>
+			<td>
+				<p><span class="notranslate">Netvis</span> clients inherit the <span class="notranslate">-full</span> setting the server uses.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">NETVIS</th>
+			<td>
+				<p><span class="notranslate">Netvis</span> clients now automatically download <span class="notranslate">.bsp</span> and <span class="notranslate">.prt</span> data from the server.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">NETVIS</th>
+			<td>
+				<p><span class="notranslate">Netvis</span> clients now download the data calculated during <span class="notranslate">BasePortalVis</span> from the server.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">NETVIS</th>
+			<td>
+				<p>Improved efficiency of <span class="notranslate">netvis</span> clients to nearly optimal levels.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLVIS</th>
+			<td>
+				<p>Merged in <a href="command-reference.html#hlvis-full" class="notranslate">-full</a> vis patch from <span class="notranslate">Antony Suter</span> &lt;<a href="mailto:antony@mira.net" class="notranslate">antony@mira.net</a>&gt; This increases the quality of the vis calculations at the expense of a minor speed hit. Anyone who has worked with <span class="notranslate">Quake 1</span> editing should remember this option.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLVIS</th>
+			<td>
+				<p>Optimized <span class="notranslate">HLVIS</span> and improved its performance by around 20-30%.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed a rare crash with <a href="command-reference.html#hlcsg-onlyents" class="notranslate">-onlyents</a> updates.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>The number of texture lights inside <span class="notranslate">.rad</span> files is now unlimited.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.3.1"></a>Version 2.3.1</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Fix <a href="common-mapping-problems.html#bad_surface_extents" class="notranslate">bad surface extents</a> workaround.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fix <span class="notranslate">Intel</span> C/C++ Compiler 4.5 optimizations which caused the tools to generate strange looking maps.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fix <span class="notranslate">BadSurfaceExtents</span> message in <span class="notranslate">HLRAD</span> to compensate for <span class="notranslate">ORIGIN</span> based brush models location.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.3"></a>Version 2.3</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLVIS</th>
+			<td>
+				<p>Merged in code from <span class="notranslate">Antony Suter</span> &lt;<a href="mailto:antony@mira.net" class="notranslate">antony@mira.net</a>&gt; (aka <span class="notranslate">Examiner</span>) which improves vis performance by approximately 40%.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Allow more entities, by not counting static light entities the real Half-Life engine limits. Switchable/pulsing lights are still counted, howerver.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed <span class="notranslate">trigger/clip</span> textures consuming RAD resources and affecting the radiosity lighting pass.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Removed obsolete <a href="command-reference.html#hlcsg-hullfile" class="notranslate">-hullfile</a> and <span class="notranslate">-glview</span> options.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Worked around an error in Half-Life (<span class="notranslate">BadSurfaceExtents</span>) which could occasionally occur only in software mode on a map.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Created '<span class="notranslate">entities.void</span>' '<span class="notranslate">mapname.void</span>' '<span class="notranslate">-void</span> filename', which is a list of entity names to be allowed in the <span class="notranslate">void</span> without causing a leak. <span class="notranslate">Monster, item, &amp; trigger</span> entities should almost never be allowed in this list, but things like <span class="notranslate">func_door_rotating</span> (which occasionally needs its origin in the <span class="notranslate">void</span>), and <span class="notranslate">multi_manager</span>'s, etc can be placed in the <span class="notranslate">void</span> without problems.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Correctly not allow brush entities composed of only <span class="notranslate">ORIGIN</span> and <span class="notranslate">CLIP</span> textures which would slip through the error checking in <span class="notranslate">HLCSG</span> and cause <span class="notranslate">HLBSP</span> to crash.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.2.2"></a>Version 2.2.2</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed opaque brushes lighting incorrectly with <span class="notranslate">ORIGIN</span>-based entities (<span class="notranslate">func_door_rotating</span>, <span class="notranslate">func_tracktrain</span> etc) or with entities using <a href="entity-changes.html#light_origin" class="notranslate">light_origin</a>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed opaque brushes not casting shadows when combined with the <a href="entity-changes.html#light_origin" class="notranslate">light_origin</a>.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.2.1"></a>Version 2.2.1</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed a cute little bug involving <span class="notranslate">light_environment</span>'s and entities blocking light.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.2.0"></a>Version 2.2.0</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fix rare '<span class="notranslate">DecompressVis</span>' overflow.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>The <a href="command-reference.html#hlcsg-noskyclip" class="notranslate">-noskyclip</a> option now also means to not discard the non-sky textured objects 'inside' a sky zone, as sometimes the skies sometimes come out solid always as a result of removing the faces.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Removed <span class="notranslate">-watervis</span>, will add light through water without hacking vis to do it at some point in the future.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added <a href="command-reference.html#hlrad-nomatrix" class="notranslate">-nomatrix</a> command line option. This option causes <span class="notranslate">HLRAD</span> to not use a <span class="notranslate">vismatrix</span> cache at all. <span class="notranslate">-nomatrix</span> is faster than <a href="command-reference.html#hlrad-sparse" class="notranslate">-sparse</a> especially on multiprocessor (4+ CPU) machines, or on machines where even <span class="notranslate">-sparse</span> mode uses too much memory. However, if using a large number of opaque brush entities in the world, the <span class="notranslate">nomatrix</span> mode will be dramatically slower than the normal or <span class="notranslate">sparse</span> methods.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Dramatically reduced memory usage of transfers data.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Brush based entities can affect lighting by adding a key/value of <a href="entity-changes.html#zhlt_lightflags" class="notranslate">zhlt_lightflags</a>.</p>
+				<ul>
+					<li>0 is default</li>
+					<li>1 is 'embedded fix'</li>
+					<li> is opaque (BLOCKS LIGHT!)</li>
+					<li>3 is both</li>
+				</ul>
+				<p>For opaque brushes, it will be frequently necessary to place point lights inside the brush so that faces obscured by the brushes are properly lit (for example the trim adjacent to a <span class="notranslate">func_door</span>).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed light streaking across edges of surfaces.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed bleed correction code pulling in lightmap pixels unnecessarily far distances in rare cases, when a simple and short nudge into the world would do the trick.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Completely fixed phong shading (smoothing) using bad data in some cases.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Removed the triangulation code (no more <span class="notranslate">MAX_TRI_TRIS, MAX_TRI_POINTS, MAX_TRI_EDGES</span> errors), and replaced it with a simpler and more correct looking algorithm.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Replaced patch subdivision code. A chop of 64 will generate moderately more patches than before, and bounced lighting looks much better overall.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Removed <span class="notranslate">-maxchop</span>, as a result of reworking patch subdivision code.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Allow command line options after the map name in the command line.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Added <a href="command-reference.html#shared-noinfo" class="notranslate">-noinfo</a> switch to not show extended configuration settings during run.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.1.3"></a>Version 2.1.3</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed smoothing glitch.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed burnt spots from degenerate smoothing condition.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed <a href="entity-changes.html#light_origin" class="notranslate">light_origin</a> trick which was broken in <a href="version-history.html#zhlt2.1.2">version 2.1.2</a>.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.1.2"></a>Version 2.1.2</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added <span class="notranslate">-texscale</span> option. This controls the chop value of texture light surfaces. In the past this was set to the same as <a href="command-reference.html#hlrad-chop" class="notranslate">-chop</a>. The <a href="command-reference.html#hlrad-texchop" class="notranslate">-texchop</a> value is automatically divided by two for any <a href="command-reference.html#hlrad-extra" class="notranslate">-extra</a> mode compiles.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added <a href="command-reference.html#hlrad-dscale" class="notranslate">-dscale</a> option. This controls the scaling of direct lighting in the world. The default is 2.0 (which is technically a bug, it should be 1.0). Setting this to zero can show your map with no direct lights, and just the bounced light information, which can be helpful for debugging lighting.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed light bleed code which was a bit on the buggy side in <a href="version-history.html#zhlt2.1.0">version 2.1.0</a>. The <span class="notranslate">-nobleedfix</span> switch has been removed as most of the code was rewritten.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed '<span class="notranslate">Bad Light Error</span>' which was caused by a change in <a href="version-history.html#zhlt2.1.0">version 2.1.0</a> for the skyfix.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Eliminated most or all <span class="notranslate">SwapTransfers</span> unmatched warnings.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed 'normal texture inside sky' culling which was added in <a href="version-history.html#zhlt2.1.0">version 2.1.0</a> which was generating HOM in some cases.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.1.1"></a>Version 2.1.1</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed bogus command line parameter code in <span class="notranslate">rad</span> not identical to the code in <span class="notranslate">csg, bsp, &amp; vis</span>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed a global variable rename which broke the <span class="notranslate">-maxchop</span> switch.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.1.0"></a>Version 2.1.0</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added alternate algorithm to reduce the size of the <span class="notranslate">vismatrix</span>. It is slower to use, but uses a lot less memory. It can also be used to break the 65535 lightmap limit imposed by the normal <span class="notranslate">vismatrix</span>. The command line switch to use is <a href="command-reference.html#hlrad-sparse" class="notranslate">-sparse</a>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added <a href="command-reference.html#hlrad-circus" class="notranslate">-circus</a> command line switch. All pixels in the lightmaps which receive 0 lighting get set to a random and very bright color. Handy for finding lighting anomalies and areas dependent on bounced lighting information.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed the dark spots where sky brushes meet world brushes. The fix also reduces the number of necessary <span class="notranslate">light_environment</span> entities in a map to 1 (it is used globally for all <span class="notranslate">SKY</span> in a map now). The older somewhat broken behavior (which tests line of sight to all surfaces and a <span class="notranslate">light_environment</span>) is still available, as the command line switch <a href="command-reference.html#hlrad-noskyfix" class="notranslate">-noskyfix</a>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed light bleeding through thin walls (can be disabled with <span class="notranslate">-nobleedfix</span>).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Brush entities can have a new key "<a href="entity-changes.html#light_origin" class="notranslate">light_origin</a>" which points to a <span class="notranslate">targetname</span> of an entity. The brush entity is moved to the location of the targeted entity for the purposes of lighting.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed lighting of brush entities which have an origin <span class="notranslate">ORIGIN</span>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Entries in <span class="notranslate">lights.rad</span> can now have C++ style // comments.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>World brush faces on the interior of <span class="notranslate">SKY</span> brushes are now discarded, so as not to consume resources (texture info, lightmaps etc), and make it easier to see the map when noclip'ed outside the world.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Added code to detect when brushes overlap by 'too much'. This feature is disabled by default and can be set with the <a href="command-reference.html#hlcsg-brushunion" class="notranslate">-brushunion</a> command line switch. The value to specifiy is a percentage of volume a brush is overlapped by, from 0 to 100. When starting out with this command, start with higher values and work your way down, or else you are likely to get spammed for several minutes with warnings.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Revamped command line option help.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>All tools display (and log) the user configurable settings when run.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.0.6"></a>Version 2.0.6</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLVIS</th>
+			<td>
+				<p>Fixed an extremely subtle bug which would occasionally crash vis when it was trying to compress the vis data before exiting.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.0.5"></a>Version 2.0.5</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Added <span class="notranslate">CLIP</span> brushes to be allowable in entities. As long as there is at least one normal brush included in the entity, <span class="notranslate">CLIP</span>'s may be included too.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed a crash which would occur occasionaly when an <span class="notranslate">ORIGIN</span> brush is placed in the world (ironically enough, the function printing the error message was causing it).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Enabled some long-disabled code, the <a href="command-reference.html#hlrad-incremental" class="notranslate">-incremental</a> switch for <span class="notranslate">HLRAD</span>, so that turnaround time for light tweaking can be reduced.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.0.4"></a>Version 2.0.4</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed <abbr title="Quake Army Knife" class="notranslate">QuArK</abbr> texture alignment glitches caused by the new code to handle the <span class="notranslate">Worldcraft</span> 3.3 map format.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.0.3"></a>Version 2.0.3</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Somehow left out <span class="notranslate">ORIGIN</span> in the list of stuff to allow in entities in the new check in <span class="notranslate">HLCSG</span>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">NETVIS</th>
+			<td>
+				<p>Added extended command line help to <span class="notranslate">netvis</span> to explain how to run it.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.0.2"></a>Version 2.0.2</td>
+		</tr>
+		<tr>
+			<th class="notranslate">NETVIS</th>
+			<td>
+				<p>Fixed progress display not updating until the very end.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">NETVIS</th>
+			<td>
+				<p>Fixed <span class="notranslate">netvis</span> not requiring either one of <span class="notranslate">-server</span> or <span class="notranslate">-connect</span> command line parameters.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.0.1"></a>Version 2.0.1</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Added <a href="command-reference.html#hlcsg-noskyclip" class="notranslate">-noskyclip</a> parameter for those making mods which need it off for some things.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">NETVIS</th>
+			<td>
+				<p>Cleaned up multithreading exit code which was probably causing corrupted <span class="notranslate">bsp</span>'s to get written after <span class="notranslate">vis</span> completed in certain circumstances.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">NETVIS</th>
+			<td>
+				<p>Added progress display to <span class="notranslate">BasePortalVis</span> part of <span class="notranslate">netvis</span>.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt2.0.0"></a>Version 2.0.0</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Support for a new version of <span class="notranslate">Worldcraft</span> (version 3.3).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLVIS</th>
+			<td>
+				<p>A new program '<span class="notranslate">netvis</span>' has been added to <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr>. This program is for distributed <span class="notranslate">VIS</span> compilation across multiple computers. The code came from <span class="notranslate">netvis</span> for <span class="notranslate">Quake 1</span>, and was heavily modified so it would work correctly and efficiently. While the code is multithreaded, the portal calculations are not, and one client per processor will need to be fired up on multi-processor machines.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p><span class="notranslate">-skyclip</span> is now obsolete. Clipping of skies, by automatically copying all <span class="notranslate">SKY</span> brushes with a duplicate <span class="notranslate">CLIP</span> brush in the same place, is now automatic and cannot be turned off. The brush numbering problems that <span class="notranslate">-skyclip</span> used to create, are no longer a problem.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p><span class="notranslate">HLCSG</span> will more actively find brushes of the wrong type in the world or in entities (i.e. <span class="notranslate">CLIP</span>, <a href="special-textures.html#hint" class="notranslate">HINT</a>, etc in entities).</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Recompiled with <span class="notranslate">__fastcall</span> on default, and <span class="notranslate">-O2</span> option with ICL now produces <span class="notranslate">.exe</span>'s that won't crash (was previously using <span class="notranslate">-O1</span>). Maybe faster, maybe not.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Cleaned house in the code, ran it all through indent, removed all remaining unused functions in the libraries, integrated the <span class="notranslate">netvis</span> code, started providing <span class="notranslate">MS Visual Studio</span> project files again.</p>
+			</td>
+		</tr>
+		<tr>
+			<th><span class="notranslate">PERL</span> UTILS</th>
+			<td>
+				<p>Revamped the <span class="notranslate">Perl</span> scripts to work in all cases, gave them consistent usage help and command lines. Added a new script called '<span class="notranslate">dumpline.pl</span>' which will dump an entity based on line number, which is frequently needed to find an entity that stops <span class="notranslate">HLCSG</span> with an '<span class="notranslate">line XXXX is incomplete!</span>' message.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt1.6.2"></a>Version 1.6.2</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Found one last unnaturally large object created on the stack, it is now allocated from the heap. Unix compiles of <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> work better with 'sane' <span class="notranslate">ulimits</span>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Replaced relatively vague '<span class="notranslate">Error: ParseEntity: { not found</span>" into one that displays the entity number which had a problem.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Replaced relatively vague '<span class="notranslate">Error: parsing brush</span>' with a message that displays entity/brush/face numbers as well as the bogus text.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Set <span class="notranslate">MAX_MAP_PLANES</span> back to 32767, it seems Half-Life did some really weird things when running a map, by having it be higher.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Increased <span class="notranslate">MAX_MAP_TEXINFO</span> from the original limit 8192 to its maximum 32767.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Created '<a href="command-reference.html#shared-dev" class="notranslate">-dev</a> #' command line switch for developer output, and migrated various messages from <a href="command-reference.html#shared-verbose" class="notranslate">-verbose</a> to it. The # is a number from 0 to 6.</p>
+				<ul>
+					<li>0 being off</li>
+					<li>1 shows major errors</li>
+					<li>2 shows warnings</li>
+					<li>3 shows informative messages</li>
+					<li>4 shows verbose fluff/lint messages</li>
+					<li>5 is spam mode</li>
+					<li>6 is mega-spam mode :)</li>
+				</ul>
+				<p>The <span class="notranslate">-dev</span> switch is for <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> developers and possibly users troubleshooting a <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> bug.</p>
+				<p><a href="command-reference.html#shared-verbose" class="notranslate">-verbose</a> is for map makers to show miscellaneous messages about the map compilation process</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Added better error handling logic in the core threading functions for the <span class="notranslate">Win32</span> platform</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt1.6.1"></a>Version 1.6.1</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed <a href="command-reference.html#hlrad-bounce" class="notranslate">-bounce</a> once and for all (fat fingered a constant just before shipping <a href="#zhlt1.6">version 1.6</a>).</p>
+			</td>
+		</tr>
+		<tr>
+			<th>DOCS</th>
+			<td>
+				<p>Replaced <span class="notranslate">clipnode.rmf</span> sample map with <span class="notranslate">clipnode.map</span> so it can load in any editor.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt1.6"></a>Version 1.6</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Increased <span class="notranslate">MAX_MAP_BRUSHES</span> (the maximum number of brushes in the map) from 4096 to 8192.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Increased <span class="notranslate">MAX_MAP_PLANES</span> from 32767 to 65535, and changed some data structures from short to unsigned short. Half-Life seems to tolerate it.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Increased <span class="notranslate">MAX_TRI_POINTS</span> from 3072 to 4096. This made the <span class="notranslate">tringulation_t</span> structure jump from 35MB to 70MB, hopefully this won't cause anyone too much trouble (as it isnt allocated until after the <span class="notranslate">vismatrix</span> is freed).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLVIS</th>
+			<td>
+				<p>Added buffer overflow errorchecking in <span class="notranslate">CompressVis</span> and <span class="notranslate">DecompressVis</span>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed unusally large <a href="command-reference.html#hlrad-bounce" class="notranslate">-bounce</a> values being allowed (or negative bounces).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed <span class="notranslate">swaptransfer</span> messages from printing their descriptions multiple times.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed '<span class="notranslate">outside world</span>' messages from printing their descriptions multiple times.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added total number of <span class="notranslate">swaptransfer</span> errors at end of run, for trivia.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt1.5"></a>Version 1.5</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed BSP warning accidentally removed and replaced with a vague generic message. '<span class="notranslate">NULL Pointer</span>' caused by a <span class="notranslate">CLIP</span> textured brush based entity now correctly logs an error.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Cleaned up source code directory layout.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>DOCS</th>
+			<td>
+				<p>More documentation fixes.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>PACKAGE</th>
+			<td>
+				<p>Fixed Unix source package not having <span class="notranslate">README</span> and <span class="notranslate">INSTALL</span> text files.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt1.4.1"></a>Version 1.4.1</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed <span class="notranslate">HLRAD</span> not using <span class="notranslate">lights.rad</span> from the directory <span class="notranslate">hlrad.exe</span> lives in.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed maps occasionally coming out pitch black in <span class="notranslate">HLRAD</span> from <a href="#zhlt1.4">version 1.4</a>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Made a cosmetic change to display the bounce # during the bounce phase of <span class="notranslate">HLRAD</span> runs.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt1.4"></a>Version 1.4</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Added support for the optional keys <a href="entity-changes.html#_fade" class="notranslate">_fade</a> and <a href="entity-changes.html#_falloff" class="notranslate">_falloff</a> keys in light entities.</p>
+				<ul>
+					<li><span class="notranslate">_fade</span> defaults to 1 if not set. Values approaching zero cause light to travel further, values greater than 1 cause light to not travel as far.</li>
+					<li><span class="notranslate">_falloff</span> defaults to 2 if not set. The only other valid value is 1. 2 uses inverse square falloff, 1 uses plain 'inverse falloff'. Light travels REALLY far without dissipating with <span class="notranslate">_falloff 1</span>.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p><span class="notranslate">HLRAD</span> will refuse to run if there are no lights in a level.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p><a href="command-reference.html#hlrad-fade" class="notranslate">-fade</a> and <a href="command-reference.html#hlrad-falloff" class="notranslate">-falloff</a> added to command line to <span class="notranslate">HLRAD</span>. Entities which do no have explicit values set in them will use the global values set by the command line. The defaults are the same as above with the entities.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p><span class="notranslate">SKY</span> brushes can be clipped automatically if the <span class="notranslate">-skyclip</span> parameter is specified to <span class="notranslate">HLCSG</span>. Caveat: the brush numbers in error messages will be WRONG with respect to the <span class="notranslate">.map</span> file when <span class="notranslate">-skyclip</span> is in effect.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>The tools no longer require <span class="notranslate">lights.rad</span>, and will warn if there isn't one instead.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Added <a href="command-reference.html#shared-nolog" class="notranslate">-nolog</a> to all tools to generate 'pre 1.3' behavior (no logfile generation of any kind).</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Added <a href="command-reference.html#shared-lowhigh" class="notranslate">-low</a> and <a href="command-reference.html#shared-lowhigh" class="notranslate">-high</a> to all the tools. This changes the proces priority from its default (normal) to a higher or lower value. Caveat: on Unix only root can increase the priority level of processes, so usually only <span class="notranslate">-low</span> is of interest in that environment.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Started adding more explanitory help for error messages. The most fatal/common ones have been done first. The rest will have to wait for further versions of <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr>.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt1.3.1"></a>Version 1.3.1</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed <span class="notranslate">HLCSG</span> <a href="command-reference.html#hlcsg-onlyents" class="notranslate">-onlyents</a> compiles, was deleting the <span class="notranslate">.bsp</span> always with <span class="notranslate">HLCSG</span> starting with <a href="#zhlt1.3"><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 1.3</a> (oops!)</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed a documentation bug in setting up <span class="notranslate">Worldcraft</span> compile.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Added startup banner to usage screens.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt1.3"></a>Version 1.3</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Create a 'fatal warning' type that flags the compile as failing at the end, but allows processing to continue so that muliple warnings can be displayed in a single run.</p>
+				<p>Examples include:</p>
+				<ul>
+					<li><span class="notranslate">CanonicalVector: degenerate</span></li>
+					<li><a href="common-mapping-problems.html#brush_outside_world" class="notranslate">(brush) outside world</a></li>
+					<li><a href="common-mapping-problems.html#brush_with_coplanar_faces" class="notranslate">coplanar brush faces</a></li>
+					<li><a href="common-mapping-problems.html#mixed_face_contents" class="notranslate">mixed contents</a></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Cleaned up the code and removed dead <span class="notranslate">#ifdef</span>'s and unused functions. Clarified globals and made as many functions static as possible.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Added simultaneous logging to display and logfile. Logfile names are surprisingly called <span class="notranslate">mapname.log</span>. Errors also get generated into a simplified mapname<span class="notranslate">.err</span> file.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Added error detection bailout. When any of the tools generates an error, the <span class="notranslate">mapname.err</span> file is generated. <span class="notranslate">HLBSP</span>, <span class="notranslate">HLVIS</span>, and <span class="notranslate">HLRAD</span> will refuse to run if this file exists. This was added as a safety measure for the various compiler front ends and batch files out there which do not properly 'not run' the tools if one of them encounters a problem.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Merged in some changes from <span class="notranslate">MUTILS</span> which was based on <a href="#zhlt1.0"><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 1.0</a>. The system should now compile (and run) on <span class="notranslate">Linux</span>, <span class="notranslate">IRIX</span>, and probably most other <span class="notranslate">POSIX</span> capable systems.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Tweaked progress indicators. As a result of the <span class="notranslate">MUTILS</span> merge, the progress indicators have changed. Unfortunately for Windows sytems I had to disable it by default for the large amount of updates tends to crash <span class="notranslate">Worldcraft</span> if you are using that as your compiler front-end. If you want to see the new display (and you aren't using <span class="notranslate">Worldcraft</span> as a front-end) just add the new command line switch <a href="command-reference.html#shared-estimate" class="notranslate">-estimate</a> to each tool. For the Unix versions, it is enabled by default and you should use <span class="notranslate">-noestimate</span> to go back to the old-ish style display.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Bumped <span class="notranslate">MAX_TRI_TRIS</span> up 50%. Aparently some people were running in to this one.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Added code to cleanup stale files. On startup, <span class="notranslate">HLCSG</span> now deletes mapname<span class="notranslate">.p0, .p1, .p2, .p3, .pts, .prt</span>, and <span class="notranslate">.bsp</span>. This helps the other tools not ever run with stale data.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Added <span class="notranslate">WADPATH</span> environment variable. The environment variable <span class="notranslate">WADPATH</span> may be used to point to a single directory (no trailing slash) for wad files. This is primarily of interest to the people running the <span class="notranslate">Unix/Linux/POSIX</span> (whatever) port of <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> and need some way of getting <span class="notranslate">HLCSG</span> pointed to the wad files. The directory names inside the "<span class="notranslate">wad</span>" attribute of the <span class="notranslate">worldspawn</span> entity will be preserved as they are, so you can easily compile maps exported from <span class="notranslate">Worldcraft</span> in Unix, without having to tweak them first.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt1.2"></a>Version 1.2</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Promoted the inability for <span class="notranslate">HLCSG</span> to find a <span class="notranslate">.wad</span> file from a warning to an error (which caused bsp to crash usually).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Added a command line switch "<a href="command-reference.html#hlbsp-maxnodesize" class="notranslate">-maxnodesize</a> n". The default value is 1024. A smaller value causes bsp to generate many more portals (making the bsp tree much more complex) which can sometimes help vis do a better job on its own without <a href="special-textures.html#hint" class="notranslate">HINT</a> brushes. Larger values of course, do the opposite. Larger values with well placed <span class="notranslate">HINT</span> brushes can keep the bsp tree simple yet highly efficient.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Removed <span class="notranslate">-draw</span> option and dependency on tools for OpenGL.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Removed <span class="notranslate">-draw</span> option and dependency on tools for OpenGL.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Texture names in the MAP files are converted to UPPERCASE at compile time. Some non-<span class="notranslate">Worldcraft</span> editors occasionally emit lowercase texturenames in the <span class="notranslate">.map</span> files which is bad.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Command line switches are no longer case sensitive.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>'<a href="common-mapping-problems.html#plane_with_no_normal" class="notranslate">plane with no normal</a>' warning was promoted to an Error, to prevent <span class="notranslate">HLBSP</span> from crashing.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>PACKAGE</th>
+			<td>
+				<p>Added installation instructions for <span class="notranslate">Worldcraft</span>, <span class="notranslate">HLCC</span>, and <span class="notranslate">Q2Beaver</span>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>PACKAGE</th>
+			<td>
+				<p>Added <span class="notranslate">dumpbrush.pl</span> and <span class="notranslate">dumpent.pl</span> scripts to the toolkit. Basically you ask them to display brush (or entity) #n and they do it.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>PACKAGE</th>
+			<td>
+				<p>Added <span class="notranslate">numberbrush.pl</span> script to the toolkit. This script adds comments to <span class="notranslate">.map</span> files so you can find a brush (or entity) by number.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Added a command line switch <a href="command-reference.html#shared-texdata" class="notranslate">-texdata</a> to all the tools. The default is 4MB. If you wish to use more than 4MB, add "<span class="notranslate">-texinfo</span> n" to the command line for all four tools; <span class="notranslate">HLCSG</span>, <span class="notranslate">HLBSP</span>, <span class="notranslate">HLVIS</span>, <span class="notranslate">HLRAD</span>; where n is a number in kilobytes. i.e. <span class="notranslate">-texdata 8192</span> would set texture data to 8MB</p>
+				<p>This approach is kind of hack-ish now and will get cleaned up later.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG/HLBSP</th>
+			<td>
+				<p>Added support for <span class="notranslate">HINT</span> brushes. To use a <span class="notranslate">HINT</span> brush in Half-Life, place <span class="notranslate">zhlt.wad</span> into your <span class="notranslate">valve</span> directory, and add it to the list of wads in your editor. The tools will always treat <span class="notranslate">zhlt.wad</span> as if it were included via <a href="command-reference.html#hlcsg-wadinclude" class="notranslate">-wadinclude</a> so there is no danger of people getting stuck with the game crashing error '<span class="notranslate">unable to open valve/zhlt.wad</span>'.</p>
+				<p><a href="special-textures.html#hint" class="notranslate">HINT</a> textures have the following 'gotchas':</p>
+				<ul>
+					<li>Every face on a hint brush MUST have the <a href="special-textures.html#hint" class="notranslate">HINT texture</a> on it. Treat it just like a sky brush, where the <span class="notranslate">SKY</span> texture is to be applied to all sides.</li>
+					<li>It is safe for a hint brush to touch or extend into the '<span class="notranslate">void</span>'.</li>
+					<li>Hint brushes, while creating more vis portals will create more polygons (potentially MANY more if you are not careful) and can make <span class="notranslate">r_speed</span> values worse or ineffective i.e. you add more polygons splitting brushes than you save by hiding an area.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th>PACKAGE</th>
+			<td>
+				<p>Added <span class="notranslate">zhlt.wad</span> which has one texture, the <a href="special-textures.html#hint" class="notranslate">HINT texture</a>. You should put this wad into your '<span class="notranslate">valve</span>' directory, and add it to your editor.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>The logic in the code which limited the length of an entity attribute had 3 values in various stages of compiling, 512, 1024, and 4096 bytes. This in effect limited it to 512, since it was the most restrictive of the 3. All of them have been changed to 4096 now. This change primarily fixes people who have long pathnames to their <span class="notranslate">wad</span> files, as well as many <span class="notranslate">wad</span> files in their list.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Extended entity text data from 128k to 512k. Half-Life seemed ok with this on my test map, but remember it makes the game use more memory.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt1.1"></a>Version 1.1</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLBSP</th>
+			<td>
+				<p>Fixed a crashbug which was caused by having a <span class="notranslate">CLIP</span> texture on an entity. Ideally <span class="notranslate">qcsg</span> should detect this.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Merged in <span class="notranslate">Tim Smith</span>'s changes to CSG for use with the <abbr title="Quake Army Knife" class="notranslate">QuArK</abbr> editor which stores its map files with raw floating point numbers.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p><a href="command-reference.html#hlcsg-wadinclude" class="notranslate">-wadinclude</a> now remembers what you specified on the command line for <a href="command-reference.html#hlcsg-onlyents" class="notranslate">-onlyents</a> recompiles. However a 'clean build' will erase the temp file used to remember, so full builds will still require <span class="notranslate">-wadinclude</span> [file<span class="notranslate">.wad</span>]</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Altered <a href="command-reference.html#hlcsg-wadinclude" class="notranslate">-wadinclude</a> [file<span class="notranslate">.wad</span>]	to take partial matches instead of full path. Ex. use <span class="notranslate">-wadinclude</span> file<span class="notranslate">.wad</span></p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p><a href="command-reference.html#hlcsg-wadinclude" class="notranslate">-wadinclude</a> is no longer case sensitive.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Be careful with the changes to <a href="command-reference.html#hlcsg-wadinclude" class="notranslate">-wadinclude</a>. It does a basic substring match so if you do	<span class="notranslate">-wadinclude halflife</span> and your Half-Life directory is say	<span class="notranslate">D:\Games\Halflife</span> it will match all wad files since it finds the string halflife somewhere in the path to the file.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Changed <span class="notranslate">MAX_MAP_MIPTEX</span> errors into asserts with friendlier descriptions.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG (1.1a)</th>
+			<td>
+				<p>Fixed texture alignment for <abbr title="Quake Army Knife" class="notranslate">QuArK</abbr> users. Thanks again to <span class="notranslate">Tim Smith</span> for getting me the 'missing' file.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>PACKAGE</th>
+			<td>
+				<p>Added <span class="notranslate">stripnulents.pl</span> and <span class="notranslate">tfcabbrev.pl</span> scripts to the toolkit.</p>
+				<ul>
+					<li><span class="notranslate">stripnulents.pl</span> removes unused entity attributes (almost all with the value of "0", plus some troublesome Team Fortress Classic (<abbr title="Team Fortress Classic">TFC</abbr>) ones from before when the <span class="notranslate">FGD</span> files were fixed).</li>
+					<li><span class="notranslate">tfcabbrev.pl</span> can convert a map's <abbr title="Team Fortress Classic">TFC</abbr> entities to and from the abbreviated format. (Ex: <span class="notranslate">g_a</span> => <span class="notranslate">goal_activation</span>).</li>
+					<li>Instructions to use these scripts are contained inside the scripts, at the top. Just look at them in a text editor such as notepad.</li>
+					<li>To use these you need to install a version of <span class="notranslate">Perl</span> onto your machine. ActiveState has the most up to date port of <span class="notranslate">Perl</span> for Windows.</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+
+	<table>
+		<tr>
+			<td class="span" colspan="2"><a id="zhlt1.0"></a>Version 1.0</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Fixed a bug which caused '<span class="notranslate">transfer &lt; 0</span>' errors, basically the algorithm which generates the <span class="notranslate">vismatrix</span> didn't have unsigned types everywhere and overflowed to negative array indexes numbers. The end result : division by zero later in the compile during <span class="notranslate">MakeScales</span> causing '<span class="notranslate">transfer &lt; 0</span>'.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLRAD</th>
+			<td>
+				<p>Changed the '<span class="notranslate">transfer &lt; 0</span>' to be a severe warning in the event it attempts a division by zero. If it happens there will be quite a few messages during the compile, but the map will be playable. However areas will be 'fugly' and have random splotches of bright and dark textures. I've called it the 'sycamore' effect since it kinda looks like that . . . REAL '<span class="notranslate">transfer &lt; 0</span>' errors not caused by division by zero attempts will still error out as normal.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Fixed <a href="command-reference.html#hlcsg-wadinclude" class="notranslate">-wadinclude</a> to strip the <span class="notranslate">.wad</span> from the <span class="notranslate">worldspawn</span> "wad" tag so the BSP would not cause Half-Life to crash when played without the <span class="notranslate">.wad</span> file. HOWEVER if you run <span class="notranslate">HLCSG</span> <a href="command-reference.html#hlcsg-onlyents" class="notranslate">-onlyents</a> at a later time, the <span class="notranslate">.map</span> file will write in the original value for the "wad" tag and will 'break' the BSP. Solution: Edit the <span class="notranslate">.map</span>, change the <span class="notranslate">worldspawn</span> entity's "wad" listing (it is one of the first few lines in the file) before doing <a href="command-reference.html#hlcsg-onlyents" class="notranslate">-onlyents</a> updates.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate">HLCSG</th>
+			<td>
+				<p>Added a texture usage display to <span class="notranslate">HLCSG</span> runs, so you always know how much texture memory your map is trying to use.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Increased the texture memory limitations from 2MB to 4MB (This is the source of <span class="notranslate">MAX_MAP_MIPTEX</span> errors in <span class="notranslate">qcsg</span>).</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Increased the max <span class="notranslate">lightdata</span> from 2MB to 4MB. It was hard to have large patch counts (>45000) with complex lighting.</p>
+			</td>
+		</tr>
+		<tr>
+			<th>ALL TOOLS</th>
+			<td>
+				<p>Added <a href="command-reference.html#shared-chart" class="notranslate">-chart</a> command line parameter to print out the bsp lump (memory) usage that normally <span class="notranslate">qrad</span> only displays when its done. Especially handywith to use with <span class="notranslate">HLCSG</span> in <a href="command-reference.html#hlcsg-onlyents" class="notranslate">-onlyents</a> mode.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+</body>
+</html>

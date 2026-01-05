@@ -1,0 +1,129 @@
+body
+{
+	font-family:verdana,tahoma,sans-serif;
+	font-size:9pt;
+	text-align:justify;
+	background-color:#ddddff;
+	color:#000000;
+	margin:2%;
+}
+
+div
+{
+	text-indent: 2em;
+}
+
+p
+{
+	text-indent: 2em;
+}
+
+h1
+{
+	font-size:20pt;
+}
+
+h2
+{
+	font-size:14pt;
+}
+
+h3
+{
+	font-size:11pt;
+}
+
+table
+{
+	text-align:justify;
+	font-size:9pt;
+	color:inherit;
+	background-color:#666699;
+	width:93%;
+	border-width:0px;
+	margin-left:3%;
+	margin-right:3%;
+}
+
+th
+{
+	font-weight:bold;
+	vertical-align:top;
+	padding:2pt;
+	color:inherit;
+	background-color:#CC99FF;
+	width:130px;
+	border-width:0px;
+
+}
+
+td
+{
+	vertical-align:top;
+	padding:2pt;
+	color:inherit;
+	background-color:#CCCCFF;
+	border-width:0px;
+}
+
+a:link
+{
+	color: #0000FF;
+	background-color:inherit;
+}
+
+a:visited
+{
+	color: #0000CC;
+	background-color:inherit;
+}
+
+a:active
+{
+	color: inherit;
+	background-color:inherit;
+	
+}
+
+a:hover
+{
+	color: #9900CC;
+	background-color:inherit;
+}
+
+li
+{
+  padding:1pt;
+}
+
+/* Needed or there are borders around images in links */
+img
+{
+  border: none;
+}
+
+/* Special Cases */
+
+td.span
+{
+	vertical-align:middle;
+	text-align:center;
+	font-weight:bold;
+	padding:2pt;
+	color:#000000;
+	background-color:#FFCC99;
+	border-width:0px;
+}
+
+td.span-note
+{
+	vertical-align:middle;
+	text-align:center;
+	color:#000000;
+	border-width:0px;
+}
+
+a.index
+{
+	font-weight:bold;
+}

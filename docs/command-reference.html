@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- GTM -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-M8XV5HD');</script>
+	<!-- End GTM -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>ZHLT Command Reference - Zoner's Half-Life Tools reference (ZHLT)</title>
+	<meta name="DC.title" content="ZHLT Command Reference - Zoner's Half-Life Tools reference (ZHLT)">
+	<meta name="description" content="Command reference for Zoner's Half-Life tools (ZHLT) 3. Detailed list of commands and their uses.">
+	<meta name="DC.description" content="Command reference for Zoner's Half-Life tools (ZHLT) 3. Detailed list of commands and their uses.">
+	<meta name="keywords" content="zhlt, command reference, zhlt command reference">
+	<meta name="DC.language" content="en">
+	<link rel="stylesheet" type="text/css" href="zhlt.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="canonical" href="http://zhlt.info/command-reference.html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<!-- GTM (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8XV5HD"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End GTM (noscript) -->
+	
+	<h1><a id="top"></a><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> command reference</h1>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<ul>
+	<li><a href="#shared-options">Shared options</a></li>
+	<li><a href="#hlcsg"><span class="notranslate">HLCSG</span></a></li>
+	<li><a href="#hlbsp"><span class="notranslate">HLBSP</span></a></li>
+	<li><a href="#hlvis"><span class="notranslate">HLVIS</span></a></li>
+	<li><a href="#hlrad"><span class="notranslate">HLRAD</span></a></li>
+	</ul>
+
+	<h2><a id="shared-options"></a>Shared options</h2>
+	<table>
+		<tr>
+			<th class="notranslate"><a id="shared-chart"></a>-chart</th>
+			<td>
+				<p>Display bsp statitics.</p>
+				<p>This option will cause the program to print out the bsp statistics right before it writes out the bsp. It is most handy to do <span class="notranslate">-chart</span> with <span class="notranslate">HLRAD</span> and <span class="notranslate">HLVIS</span> at the end of the compiles. The <span class="notranslate">ripent</span> program will alway display the chart.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="shared-dev"></a>-dev #</th>
+			<td>
+				<p>Compile with developer message.</p>
+				<p>Internal <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> debugging messages have been slowly added to the tools. This variable sets the 'level' to display. In order (starting with 0 and going up) : Off, Error, Warning, Info, Fluff, Spam, MegaSpam. Generally this option should never be used except at request, to diagnose a compile problem on an end-users machine.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="shared-estimate"></a>-estimate</th>
+			<td>
+				<p>Display estimated time during compile.</p>
+				<p>This option replaces the 10...20... style progress indicators with a estimate bar with some estimated completion times, as well as the exact number of the current job and how many jobs there are to do. The three different times remaining factor in varying amounts of historical data to guess how much longer it will take to run. It is good for a ballpark figure, but frequently not much more accurate than that.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="shared-lightdata"></a>-lightdata #</th>
+			<td>
+				<p>Set custom lightdata maximum (MB).</p>
+				<p>Higher values than the default (6MB) can cause performance issues. You should perform compatability testing before releasing maps if they're over the preset limit.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="shared-lowhigh"></a>-low | -high</th>
+			<td>
+				<p>Run program an altered priority level.</p>
+				<p>Setting the priority of the compile tools to <span class="notranslate">-low</span> is very handy, as you can multitask and do other things without really feeling the drain of the compile programs on the system, provided there is enough memory for the tools and the other programs you use.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="shared-noinfo"></a>-noinfo</th>
+			<td>
+				<p>Do not show tool configuration information.</p>
+				<p><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 2.1 added a configuration display for each of the tools as they run, to display the current settings for all configurable options as well as their defaults. This sometimes causes problems with other programs, most notably when compiling within Worldcraft, it likes to crash when too much stuff scrolls into its compile process window.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="shared-nolog"></a>-nolog</th>
+			<td>
+				<p>Don't generate the compile logfiles.</p>
+				<p>This option just disables the generation of the .log and .err files which are normally generated whenever the compile tools run.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="shared-texdata"></a>-texdata #</th>
+			<td>
+				<p>Alter maximum texture memory limit (in KB).</p>
+				<p>Half-Life was built with a 2MB texture limit, as was Opposing Force. The <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> default limit is 4MB. Even 4MB can be a bit much, when combined with model textures, skies, hud graphics, and more. This is especially true of people with older cards (Voodoo 1 and 2's, etc).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="shared-threads"></a>-threads #</th>
+			<td>
+				<p>Manually specify the number of threads to run.</p>
+				<p>This option is generally only necessary on the non-windows versions of the tools, where there is not a standard way to detect the number of processors in the system and auto-set the value. It can be manually set on windows machines, primarily if you wish to use fewer threads than processors.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="shared-verbose"></a>-verbose</th>
+			<td>
+				<p>Compile with verbose messages.</p>
+				<p>Many of the tools have 'minor warnings' and informative messages which are displayed when verbose mode is set. As the <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 2.x series developed, many of the developer specific settings have been moved to developer messages, while the mapper-related messages remain as verbose messages.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="hlcsg"></a>HLCSG</h2>
+	<table>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-brushunion"></a>-brushunion #</th>
+			<td>
+				<p>Threshold to warn about overlapping brushes.</p>
+				<p>This option is a mapper debugging feature. The value passed in is a percentage (0 to 100) of overlap of two brushes before a warning is printed. Starting with a high value (95+) is a good idea, as going too low to start can print hundreds or thousands of messages. The brush numbers of the intersecting brushes and the percentage in which they intersect each other is displayed for each occurence. This option is off by default as it dramatically slows down <span class="notranslate">HLCSG</span> to do these calculations.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-cliptype"></a>-cliptype value</th>
+			<td>
+				<p>Select the clip hull generation method. Choices are <span class="notranslate">smallest</span>, <span class="notranslate">normalized</span>, <span class="notranslate">simple</span>, <span class="notranslate">precise</span> or <span class="notranslate">legacy</span> (default).</p>
+				<p>The <span class="notranslate">ExpandBrush</span> function of <span class="notranslate">HLCSG</span> has been reworked to fix 2 bad assumptions that led to &quot;sticky&quot; exterior corners in Half-Life maps.</p>
+				<p>To use the new clip hull feature, use &quot;<span class="notranslate">-cliptype precise</span>&quot;. If you want to same some clipnodes, you can use &quot;<span class="notranslate">-cliptype simple</span>&quot; which will shift player models a few units upward on sloped floors. If you want to use the new <span class="notranslate">HLCSG</span> for the speed improvement but want the old style clipping, use &quot;<span class="notranslate">-cliptype legacy</span>&quot;. If you want to have the smallest possible number of clipnodes and don't mind some stickyness (not recommended), use &quot;<span class="notranslate">-cliptype smallest</span>&quot;. &quot;<span class="notranslate">-cliptype normalized</span>&quot; uses bugfix 1 and skips bugfix 2 for people who don't want denormalized brushes.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-hullfile"></a>-hullfile file</th>
+			<td>
+				<p>Load a custom hullfile.</p>
+				<p>Loads a custom set of hulls for the collision hull generation. The file is composed of 3 lines of 3 whitespace delimited numbers. Each line is an X Y Z size of the bounding box it is for. Only specific mod authors and their mapping teams should ever worry about this feature.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-noclip"></a>-noclip</th>
+			<td>
+				<p>Don't create clipping hull.</p>
+				<p>Half-Life, like Quake1, has 4 hulls: 1 visual hull and 3 collision hulls. This option disables generation of the collision hulls for a small savings in compile time. Note that the world will not be solid at all (everything will fall into the void) with this option set.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-noclipeconomy"></a>-noclipeconomy</th>
+			<td>
+				<p>Disables redundant clipnode stripping.</p>
+				<p>Clipnodes are 'planes' that restrict the player movement. They are placed along the walls and floors of your level, so that they player cannot pass though them. However, like everything else in the Half-Life universe, they are limited, and will max out with compile errors if you end up using too many of them.</p>
+				<p><span class="notranslate">HLCSG</span> will analyse how the clipnodes are being used in your map. If it thinks that it can get away with not using clipnodes in any particular situation (such as in func_illusionaries which don't need clipnodes), then <span class="notranslate">HLCSG</span> will strip them away from the level. This means that by default, your clipnode counts will be lower than normal. This doesn't mean that you will never see another <span class="notranslate">MAX_MAP_CLIPNODES</span> error, it just means it's less likely to happen in the first place.</p>
+				<p>Use this switch to turn of clipnode economy mode if you believe that it is causing problems.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-nonulltex"></a>-nonulltex</th>
+			<td>
+				<p>Disables <a href="special-textures.html#null"><span class="notranslate">NULL</span> texture</a> stripping.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-noskyclip"></a>-noskyclip</th>
+			<td>
+				<p>Disable automatic clipping of <span class="notranslate">SKY</span> brushes.</p>
+				<p>By default <span class="notranslate">HLCSG</span> will CLIP all <span class="notranslate">SKY</span> brushes, as well as remove all non-sky faces on the 'inside' of a sky brush (which eases up vis time, and improves some time and memory usage in rad as well).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-nowadtextures"></a>-nowadtextures</th>
+			<td>
+				<p>Include all used textures into bsp.</p>
+				<p>This option is obsoleted by <span class="notranslate">-wadinclude</span> and is only left in to retain some backwards compatibility.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-nullfile"></a>-nullfile file</th>
+			<td>
+				<p>Specify a file containing a list of entities to retexture with the <a href="special-textures.html#null"><span class="notranslate">NULL</span> texture</a>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-onlyents"></a>-onlyents</th>
+			<td>
+				<p>Do an entity update from <span class="notranslate">.map</span> to <span class="notranslate">.bsp</span></p>
+				<p>This option will take the entities from the <span class="notranslate">.map</span> file and update them into the <span class="notranslate">.bsp</span> file. For the most part, entities can only be edited. Adding or removing any can reorder the other entities which frequently breaks brush based entities, especially triggers.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-tiny"></a>-tiny #</th>
+			<td>
+				<p>Minimum brush face surface area before it is discarded.</p>
+				<p>Tiny brush faces are outright removed. The current cut-off is 0.5 square units. It is dangerous to drop faces in this manner, as the BSP tree for the world can be unusable, or generate leaf portal errors or hall-of-mirrors vis errors.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-wadautodetect"></a>-wadautodetect</th>
+			<td>
+				<p>Enable automatic wad detection.</p>
+				<p>Automatic wad detection is a simple utility that will exclude any wadfiles from the bsp that aren't in use by the map. This enables you to add any assortment of wadfiles you wish, and yet only have those that are actually used by the map included in the <span class="notranslate">.bsp</span> file.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-wadcfgfile"></a>-wadcfgfile path</th>
+			<td>
+				<p>Manually specifies the path to the <span class="notranslate">wad.cfg</span> file. By default, the tools will look in the same directory and the Half-Life directory.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-wadconfig"></a>-wadconfig name</th>
+			<td>
+				<p>Use a custom wad configuration in the <span class="notranslate">wad.cfg</span> custom wad configuration file.</p>
+				<p>Custom wad configurations are used to enable you to choose which .wad files you want written into the the .bsp file, regardless of what happens to be in your editor, for any given game configuration. So, now, <span class="notranslate">HLCSG</span> will ignore the wads that you have configured in your editor, and instead only write in the ones you specify.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlcsg-wadinclude"></a>-wadinclude file</th>
+			<td>
+				<p>Place textures used from wad specified into bsp.</p>
+				<p>This option will cause csg to include used textures from the named wadfile into the bsp. It does partial name matching, is not case sensitive, and can also match directory names. If multiple includes need to be done, <span class="notranslate">-wadinclude</span> must be specified multiple times, once for each include. Only textures actually used in the map are included into the bsp.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="hlbsp"></a>HLBSP</h2>
+	<table>
+		<tr>
+			<th class="notranslate"><a id="hlbsp-leakonly"></a>-leakonly</th>
+			<td>
+				<p>Run BSP only enough to check for LEAKs.</p>
+				<p>If you already know a map has a leak, this is a good option to just save some time in <span class="notranslate">HLBSP</span> and just generate the pts file.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlbsp-noopt"></a>-noopt</th>
+			<td>
+				<p>Skip plane optimization on output.</p>
+				<p><span class="notranslate">HLBSP</span> version p14 and later automatically removes unused planes when writing the output BSP.	This switch turns off that behavior.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlbsp-maxnodesize"></a>-maxnodesize #</th>
+			<td>
+				<p>Sets the maximum portal node size.</p>
+				<p>This option tweaks the maximum size of a portal node. Setting it smaller will bsp the world into smaller chunks at the cost of higher <span class="notranslate">r_speed</span> values, but it can pay itself back in many cases with making vis either faster, or more accurate, or both.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlbsp-noclip"></a>-noclip</th>
+			<td>
+				<p>Don't process the clipping hull (not for final runs).</p>
+				<p>This is a continuation of the -noclip option in <span class="notranslate">HLCSG</span>. In this case it tells <span class="notranslate">HLBSP</span> that <span class="notranslate">HLCSG</span> was compiled with -noclip and to not attempt to BSP the collision hulls as they are not present in the bsp.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlbsp-nofill"></a>-nofill</th>
+			<td>
+				<p>Don't fill outside (will mask LEAKs) (not for final runs).</p>
+				<p>This step causes filling to not be performed, which will cause all the faces on the outside of the map to not be discarded. It is probably a bad idea to rad a map that has been compiled this way, though vis should run normally.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlbsp-nonulltex"></a>-nonulltex</th>
+			<td>
+				<p>Disables <a href="special-textures.html#null"><span class="notranslate">NULL</span> texture</a> stripping.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlbsp-notjunc"></a>-notjunc</th>
+			<td>
+				<p>Don't break edges on t-junctions (not for final runs).</p>
+				<p>This is a development/debugging option that should not be set in normal use.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlbsp-subdivide"></a>-subdivide #</th>
+			<td>
+				<p>Sets the face subdivide size.</p>
+				<p>Faces in Half-Life are subdivided by this value (in units). The default is 240, and it should never need to be set lower (as it just increases <span class="notranslate">r_speed</span> values). Setting the value higher may cause problems in software mode. If in doubt, leave at the failsafe default value of 240.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="hlvis"></a>HLVIS</h2>
+	<table>
+		<tr>
+			<th class="notranslate"><a id="hlvis-fast"></a>-fast</th>
+			<td>
+				<p>Fast vis (NOT FOR FINAL COMPILES).</p>
+				<p>A fast vis is handy for running around in a developed map without dropping polygons. However <span class="notranslate">r_speed</span> values will usually be pretty bad, as well as <span class="notranslate">epoly</span> counts. The map can still be lit with <span class="notranslate">HLRAD</span>, however its quality and compile time will both suffer as a result. Maps should regularly be compiled without fast vis, as fast vis can mask a sudden increase in normal vis compile time.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlvis-full"></a>-full</th>
+			<td>
+				<p>Full vis.</p>
+				<p>This option enables extra calculations during vis, which help reduce the number of vis errors in a map over a normal vis. The speed hit is approximately 30% over a normal vis. <span class="notranslate">r_speed</span> values will generally be the same, though lower in some areas, and higher in others (primarily due to vis errors being fixed).</p>
+				<p>This switch should be used when running <a href="settings-for-final-compiles.html">final map compiles</a>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlvis-maxdistance"></a>-maxdistance #</th>
+			<td>
+				<p>Set the maximum visibility distance (in units).</p>
+				<p>Maximum Distance Visibility (<abbr title="Maximum Distance Visibility">MDV</abbr>) is a feature that prevents leafs beyond a certain distance from being rendered (or even sent to the renderer at all). In conjunction with fog, it can become the ultimate catalyst when building and compiling large maps, especially those with open areas. However, due to the nature of the calculations, not all leaves beyond a certain distance are guaranteed to be prevented from being rendered; but those that are within the maximum distance are guaranteed to be rendered.</p>
+				<p>There is a small side effect when using the Maximum Distance feature, because <span class="notranslate">HLRAD</span> relies heavily on the visibility matrix to speed up lighting operations. As such, a normal rad of the map will result in ackward, &quot;cut off&quot; lighting. This means that a special version of <span class="notranslate">HLRAD</span> is required (all compile tools in this series since <abbr title="Merl's Half-Life Tools" class="notranslate">MHLT</abbr> 1.6), which accomodates for the <abbr title="Maximum Distance Visibility">MDV</abbr> lighting problem. When you use this parameter, an extra file named &lt;mapname&gt;<span class="notranslate">.vdt</span> that contains the real visibility matrix (i.e without any <abbr title="Maximum Distance Visibility">MDV</abbr> performed) will be created, which will be used to correctly light the map.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2 class="notranslate"><a id="hlrad"></a>HLRAD</h2>
+	<table>
+		<tr>
+			<th class="notranslate"><a id="hlrad-ambient"></a>-ambient r g b</th>
+			<td>
+				<p>Set ambient world light (0.0 to 1.0, r g b).</p>
+				<p>This option sets a minimum light value to every face so that nothing comes out pitch black. The values are red green blue, scaled from 0.0 to 1.0</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-bounce"></a>-bounce #</th>
+			<td>
+				<p>Set number of radiosity bounces.</p>
+				<p>This option sets the number of times light bounces in the radiosity pass. By the time the code gets to this point, all the data is precomputed, and extra bounces are very fast. It will make the shadows less harsh using more bounces, but can help light up dark areas much more naturally.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-chop"></a>-chop #</th>
+			<td>
+				<p>Set radiosity patch size for normal textures.</p>
+				<p>Each face in the world has a grid projected onto it, and chopped up into a rather coarse set of sample points. These points are patches, and are what <span class="notranslate">HLRAD</span> uses to do the bounced lighting calculations. A higher chop sacrifices quality for both speed and memory consumption of <span class="notranslate">HLRAD</span>. A lower chop increases the quality at the expense of speed and memory usage.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-circus"></a>-circus</th>
+			<td>
+				<p>Enable 'circus' mode for locating unlit lightmaps.</p>
+				<p>This is a debugging option, which will cause all black pixels in any lightmap to be set to a random fullbright color. It only looks at the direct lighting to make this determination, and ignores any bounced radiosity data for making this determination.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-colourgamma"></a>-colourgamma r g b</th>
+			<td>
+				<p>Sets different gamma values for r, g, b.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-colourjitter"></a>-colourjitter r g b</th>
+			<td>
+				<p>Adds noise, independent colours, for dithering.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-colourscale"></a>-colourscale r g b</th>
+			<td>
+				<p>Sets different lightscale values for r, g ,b.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-coring"></a>-coring #</th>
+			<td>
+				<p>Set lighting threshold before blackness.</p>
+				<p>This value controls how much light it takes before a surface will be lit with a non-black value.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-customshadowwithbounce"></a>-customshadowwithbounce</th>
+			<td>
+				<p>Enable custom shadows for bounced light.</p>
+				<p>By default, the <a href="entity-changes.html#zhlt_customshadow"><span class="notranslate">zhlt_customshadow</span> flag</a> does not affect bounced light. Using this switch will enable custom shadows for bounced light.</p>
+				<p>This will only work with greyscale custom shadows. To enable color for the bounced light of custom shadows, use the <a href="#hlrad-rgbtransfers"><span class="notranslate">-rgbtransfers</span></a> parameter as well.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-dlight"></a>-dlight #</th>
+			<td>
+				<p>Set direct lighting threshold.</p>
+				<p>This option is similar to <span class="notranslate">-maxlight</span>, except that it re-normalizes the direct lighting values instead of clipping them if they are too high.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-dscale"></a>-dscale #</th>
+			<td>
+				<p>Set direct lighting scale.</p>
+				<p>Due to a bug in the original version of <span class="notranslate">qrad</span>, the direct lighting layer was added into the final lighting twice. The correct thing to do is only have it in there once, but at the time too many maps had been created with this assumption and it was left in there. This has been corrected as a command line switch, to scale the direct lighting by.</p>
+				<p>Using the value of '1' would generate the most correct looking maps. However, since this is configurable it has a few other uses. Using a value of '0' will remove the direct lighting completely from a map and it will only be lit with radiosity lighting. This ends up 'opposite' of <span class="notranslate">-bounce 0</span>, and can be used to check the radiosity lighting for glitches. Using larger values, like 3 or 4, cause extremely harsh direct lighting relation to the shadows and might be of use in desert or arctic maps.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-dump"></a>-dump</th>
+			<td>
+				<p>Dumps light patches to a file for <span class="notranslate">HLRAD</span> debugging info.</p>
+				<p>This is a developer option for <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr>, to dump out the patch data generated by the chopping/subdividing and make sure it looks alright.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-extra"></a>-extra</th>
+			<td>
+				<p>Turns on 9 point oversampling for lighting, making it look much better.</p>
+				<p>This switch should be used when running <a href="settings-for-final-compiles.html">final map compiles</a>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-fade"></a>-fade #</th>
+			<td>
+				<p>Set global fade (larger values = shorter lights).</p>
+				<p>This value adds in an artificial factor into the normal (1 / dist * dist) inverse square falloff calculations, by multiplying the denominator of the scale by the fade value. Point lights can set their own individual fade and falloff values, which override any global setting on the command line. These calculations only affect the direct lighting layer, as the radiosity pass always uses plain inverse square falloff.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-falloff"></a>-falloff #</th>
+			<td>
+				<p>Set global falloff mode (1 = inv linear, 2 = inv square).</p>
+				<p>This option can change the normal inverse square falloff of lighting in the direct lighting layer with inverse falloff.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-gamma"></a>-gamma #</th>
+			<td>
+				<p>Set global gamma value.</p>
+				<p>This option also occurs after the direct and radiosity layers are added together, and a global gamma correction is calculated and applied to the lighting before it is finalized.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-incremental"></a>-incremental</th>
+			<td>
+				<p>Use or create an incremental transfer list file.</p>
+				<p>This is a handy option for tweaking lighting, especially on slow or lower memory machines. <span class="notranslate">BuildVisLeafs</span>, <span class="notranslate">MakeScales</span>, and <span class="notranslate">SwapTransfers</span> can be skipped entirely on subsequent runs of <span class="notranslate">HLRAD</span>. Note that geometry must not change, but lighting can. Using the incremental file requires a simple but important procedure:</p>
+				<ul>
+					<li>First <span class="notranslate">HLRAD</span> is run normally with <span class="notranslate">-incremental</span>. In addition to the map being lit normally, it will generate an incremental file, which is essentially the transfer lists dumped to disk.</li>
+					<li>Lights can be changed in any way (moved, brightness changed, color changed, etc).</li>
+					<li>Update the entities in the bsp with an <span class="notranslate">HLCSG -onlyents</span> compile.</li>
+					<li>Re-run rad normally again with the <span class="notranslate">-incremental</span> switch. The exact same options for <span class="notranslate">-extra, -chop, -texchop, -notexscale</span> must be used on all the runs of <span class="notranslate">HLRAD</span>. All the other values may be tweaked.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-jitter"></a>-jitter r g b</th>
+			<td>
+				<p>Adds noise, monochromatic, for dithering.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-lights"></a>-lights file</th>
+			<td>
+				<p>Manually specify a <span class="notranslate">lights.rad</span> file to use.</p>
+				<p>A single <span class="notranslate">.rad</span> file can be added to the compile manually, in addition to the defaults of <span class="notranslate">lights.rad</span> and <span class="notranslate">mapname.rad</span></p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-maxlight"></a>-maxlight #</th>
+			<td>
+				<p>Set maximum light intensity value.</p>
+				<p>This option can be used to cap the bright spots, if you want a map to come out darker overall.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-nodiffuse"></a>-nodiffuse</th>
+			<td>
+				<p>Disables <span class="notranslate">light_environment</span> diffuse hack.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-nodynbounce"></a>-nodynbounce</th>
+			<td>
+				<p>Turn off bounces for dyanmic lights (overrides <span class="notranslate">-bounce</span>).</p>
+				<p>Prior to <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 1.7, only the static light type (constant brightness, no switching) was used in bounce calculations.	This switch activates that older behavior.	Benefits include smaller lightdata sizes and a lower probability of a "<a href="common-mapping-problems.html#too_many_light_styles_on_a_face" class="notranslate">too many lightstyles</a>" error.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-nolerp"></a>-nolerp</th>
+			<td>
+				<p>Disable three multi-point interpolation for radiosity patch blending, use nearest point sample instead.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-nomatrix"></a>-nomatrix</th>
+			<td>
+				<p>Disable usage of vismatrix entirely.</p>
+				<p>As the sparse code does some compression, it requires a lot of thread synchronization and does not scale well past 2 CPU's. The -nomatrix switch was added to address this. However the addition of 'opaque brush entities' starting with <abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 2.2 hurts the -nomatrix method's performance quite a bit. There is no vismatrix in this method at all, so it essentially reduces the memory requirements to zero for that structure.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-nopaque"></a>-nopaque</th>
+			<td>
+				<p>Disable all entities using <a href="entity-changes.html#zhlt_lightflags"><span class="notranslate">zhlt_lightflags 2</span></a> to block light. Using opaque entities slows rad down, and using this option is useful for doing quicker non-final lighting compiles.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-noskyfix"></a>-noskyfix</th>
+			<td>
+				<p>Disable <span class="notranslate">light_environment</span> being global.</p>
+				<p><abbr title="Zoner's Half-Life Tools" class="notranslate">ZHLT</abbr> 2.1 added a simpler more manageable system for <span class="notranslate">light_environment</span>'s. The new behavior is that a map only needs a single <span class="notranslate">light_environment</span> entity to light up all sky everywhere. The placement of the entity no longer matters. The <span class="notranslate">-noskyfix</span> option turns this feature off and enables the original code which require multiple <span class="notranslate">light_environment</span>'s to properly light up an outdoor area.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-nospotpoints"></a>-nospotpoints</th>
+			<td>
+				<p>Disables <span class="notranslate">light_spot</span> spherical point sources.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-notexscale"></a>-notexscale #</th>
+			<td>
+				<p>Do not scale radiosity patches with texture scale.</p>
+				<p>By default, <span class="notranslate">HLRAD</span> will take the texture scale and apply it to the chopping grid which is projected onto it. This option turns that off, and almost always increases the number of patches in a map as most maps have many walls scaled up to 2 and 3.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-rgbtransfers"></a>-rgbtransfers</th>
+			<td>
+				 <p>Enables RGB Transfers (for custom shadows).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-scale"></a>-scale #</th>
+			<td>
+				<p>Set global light scaling value.</p>
+				<p>This option scales the final light values right after the direct lighting layer is added to the radiosity bounced lighting layer. Low values make the world darker, higher values make it brighter.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-sky"></a>-sky #</th>
+			<td>
+				<p>Set ambient sunlight contribution in the shade outside.</p>
+				<p>Many faces have line of sight to sky, but fall in the shadow of some other object. This option affects how much of the normal sky lighting is put into the shadows.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-smooth"></a>-smooth #</th>
+			<td>
+				<p>Set smoothing threshold for blending (in degrees).</p>
+				<p>By default <span class="notranslate">HLRAD</span> uses Phong shading on all faces. If the angle between two edges is less than this value, it will be shaded with the Phong smoothing code, otherwise it won't.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-softlight"></a>-softlight r g b d</th>
+			<td>
+				<p>Scaling values for backwards-light hack.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-sparse"></a>-sparse</th>
+			<td>
+				<p>Enable low memory vismatrix algorithm.</p>
+				<p>The original vismatrix algorithm was limited to 65535 patches due to its design. Its memory usage also grew polynomially with the number of patches (patches * patches / 16 bytes). This option enables a compressed vismatrix, which at the cost of extra CPU time, breaks the 65535 limit, and also uses about 10% of the memory the vismatrix would.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="hlrad-texchop"></a>-texchop #</th>
+			<td>
+				<p>Set radiosity patch size for texture light faces.</p>
+				<p>Texture light faces are chopped with a different granularity than the normal faces, primarily so that the lighting looks good. Generally it should be half of the chop value. Adding <span class="notranslate">-extra</span> to <span class="notranslate">HLRAD</span> will automatically divide this value by 2 at runtime.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+</body>
+</html>

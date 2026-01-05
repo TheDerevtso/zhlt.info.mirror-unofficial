@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- GTM -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-M8XV5HD');</script>
+	<!-- End GTM -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>ZHLT entity changes &amp; new entities - Zoner's Half-Life Tools reference (ZHLT)</title>
+	<meta name="DC.title" content="ZHLT entity changes &amp; new entities - Zoner's Half-Life Tools reference (ZHLT)">
+	<meta name="description" content="List of entity changes supported by Zoner's Half-Life tools (ZHLT) 3. Detailed list of new functions and their uses.">
+	<meta name="DC.description" content="List of entity changes supported by Zoner's Half-Life tools (ZHLT) 3. Detailed list of new functions and their uses.">
+	<meta name="keywords" content="zhlt, entity, changes, new, flag, flags">
+	<meta name="DC.language" content="en">
+	<link rel="stylesheet" type="text/css" href="zhlt.css">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="canonical" href="http://zhlt.info/entity-changes.html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<!-- GTM (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M8XV5HD"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End GTM (noscript) -->
+	
+	<h1><a id="top"></a>Entity changes &amp; new entities</h1>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<ul>
+	<li><a href="#new-flags">New flags</a></li>
+	<li><a href="#new-entities">New entities</a></li>
+	</ul>
+
+	<h2><a id="new-flags"></a>New flags</h2>
+
+	<p>These are flags which can be set for certain entities in maps to trigger certain functionality of the compile tools.</p>
+
+	<table>
+		<tr>
+			<th class="notranslate"><a id="_diffuse_light"></a>_diffuse_light r g b</th>
+			<td>
+				<p>Gives the colour and intensity of the diffuse lighting, i.e. light from the sky, not from the sun. Applies to the <span class="notranslate">light_environment</span> entity.</p>
+				<p>This allows a different colour for the diffuse light from a <span class="notranslate">light_environment</span>, more accurately mimicking real-world lighting (yellow sun, blue sky).</p>
+				<p>It should be fully backwards-compatible with older maps - if there's no '<span class="notranslate">_diffuse_light</span>' key, it uses the intensity from the standard '<span class="notranslate">_light</span>' key.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="_fade"></a>_fade #</th>
+			<td>
+				<p>Set fade (larger values = shorter lights). Applies to any light, <span class="notranslate">light_environment</span>, or <span class="notranslate">light_spot</span> entities.</p>
+				<p>This value adds in an artificial factor into the normal (1 / dist * dist) inverse square falloff calculations, by multiplying the denominator of the scale by the fade value. Point lights can set their own individual fade and falloff values, which override any global setting on the command line. These calculations only affect the direct lighting layer, as the radiosity pass always uses plain inverse square falloff. The default value is 1.0, and as you approach 0.0 the lights will travel much further, and as you go higher than 1.0, they will travel less.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="_falloff"></a>_falloff #</th>
+			<td>
+				<p>Set falloff mode (1 = inv linear, 2 = inv square). Applies to any light, <span class="notranslate">light_environment</span>, <span class="notranslate">light_spot</span> entities.</p>
+				<p>This option can change the normal inverse square falloff of lighting in the direct lighting layer with inverse falloff.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="_minlight"></a>_minlight #</th>
+			<td>
+				<p>Brush entities only. Sets the minimum light level. Useful for when textures should always appear bright e.g. computer screens or holograms. Default is 0, max 1.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="light_origin"></a>light_origin</th>
+			<td>
+				<p>Set optional light placement. Can be applied to any brush based entity.</p>
+				<p><span class="notranslate">light_origin</span> can be used to place a brush based entity to a new location for the purposes of lighting. Typical use requires placing an <span class="notranslate">info_target</span> at the relevant location, and then setting the <span class="notranslate">light_origin</span> to point the <span class="notranslate">info_target</span>'s name. If the entity is opaque, it will also cast shadows from that location in addition to being lit as if it were there.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="style"></a>style</th>
+			<td>
+				<p>Set a style of lighting for the texlight. Can be applied to any brush based entity.</p>
+				<p>Available styles are:</p>
+				<ul>
+					<li> &nbsp; 0 : "Normal"</li>
+					<li>&nbsp;-3 : "Grouped"</li>
+					<li>10 : "Fluorescent flicker"</li>
+					<li> &nbsp; 2 : "Slow, strong pulse"</li>
+					<li>11 : "Slow pulse, noblack"</li>
+					<li> &nbsp; 5 : "Gentle pulse"</li>
+					<li> &nbsp; 1 : "Flicker A"</li>
+					<li> &nbsp; 6 : "Flicker B"</li>
+					<li> &nbsp; 3 : "Candle A"</li>
+					<li> &nbsp; 7 : "Candle B"</li>
+					<li> &nbsp; 8 : "Candle C"</li>
+					<li> &nbsp; 4 : "Fast strobe"</li>
+					<li> &nbsp; 9 : "Slow strobe"</li>
+					<li>12 : "Underwater"</li>
+				</ul>
+				<p>The Grouped setting is essentially a hack to allow your texlights to be switchable. To use it, create a brush entity with texlights on it, and set its style to Grouped; then create a light entity with the same name as the brush entity. <span class="notranslate">HLRAD</span> will now pretend that the light emitted by the texlight is &quot;really&quot; being emitted by your light entity. In other words, turning the light on and off will now turn the texlights on and off, too.</p>
+				<p>You'll probably want to set the brightness of the light entity to 0.01, so that it emits no light of its own (this trick is unnecessary if you're using Spirit of Half-Life, which supports switchable texlights directly).</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="zhlt_customshadow"></a>zhlt_customshadow</th>
+			<td>
+				<p>Defines the transparency and colouring of brush based entities for the purposes of the shadows that those brushes cast. Can be applied to any brush based entity.</p>
+				<p>To use this feature, the brush based entity must have its opaque flag set in <a href="#zhlt_lightflags">zhlt_lightflags</a>. This opaque brush entity will now cast normal shadows, just like any other brush.</p>
+				<p>To customise this shadow, add this key. The value represents how opaque the brush based entity should be treated in <span class="notranslate">HLRAD</span>, on a scale from 1.0 to 0.0 (where 1.0 is fully opaque, casting a full shadow, and 0.0 being fully transparent, casting no shadow).</p>
+				<p>Additionally, colour may be added to this shadow. Instead of defining one value, define 3, representing the RGB values of the shadow (on the same scale). For example, if you wanted a brush to cast a red shadow (for say, a red stain glass window effect), you would use a value like value 0.5 0.0 0.0</p>
+				<p>If you specify any value above 1.0, <span class="notranslate">HLRAD</span> will cast additional light (useful for and effect that may require luminecent shadows, or another effect that may require a particular shape of light).</p>
+				<p>By default, none of these will take effect on bounced light; for this to occur, you must specify the <a href="command-reference.html#hlrad-customshadowwithbounce"><span class="notranslate">-customshadowwithbounce</span> parameter</a> in <span class="notranslate">HLRAD</span>.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="zhlt_invisible"></a>zhlt_invisible</th>
+			<td>
+				<p>Makes the entity invisible. Can be applied to any brush based entity.</p>
+				<p>Adding this key with a non-empty value to any brush entity will cause the entity to be invisible in the game and not contribute to <span class="notranslate">r_speed</span> values (this is the same as using the <a href="special-textures.html#null"><span class="notranslate">NULL</span> texture</a> for the entire entity). If the value is set to 0, this attribute is ignored.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="zhlt_lightflags"></a>zhlt_lightflags</th>
+			<td>
+				<p>Set optional lightflags. Can be applied to any brush based entity.</p>
+				<ol>
+					<li>Default</li>
+					<li>'EmbeddedFix'</li>
+					<li>Opaque flag (blocks light)</li>
+					<li>Opaque + EmbeddedFix</li>
+					<li>'ConcaveFix' (must be used with opaque, this setting is useless by itself)</li>
+					<li>Opaque + ConcaveFix</li>
+				</ol>
+				<p>For opaque brushes, it will be frequently necessary to place point lights inside the brush so that faces obscured by the brushes are properly lit (for example the trim adjacent to a <span class="notranslate">func_door</span>). Setting the opaque bit is useful for most <span class="notranslate">func_wall</span>'s, some <span class="notranslate">func_illusionary</span>'s, the occasional <span class="notranslate">func_door</span>, and possibly others for some effect.</p>
+				<p>The 'EmbeddedFix' is for telling <span class="notranslate">HLRAD</span> to not used the complex light bleed fix on the entity, as sometimes when creating a brush entity that sticks through a wall, it will be lit incorrectly from the other side of the wall due to the bleed correction.</p>
+				<p>The 'ConcaveFix' is needed for curved <span class="notranslate">func_wall</span>'s, notably arch shapes. When they are set to opaque, the inner curve (the concave porition) will frequently have black fringes at the joins where brushes touch up. Setting the ConcaveFix flag fixes the black seams in these cases, but then the entity cannot have the EmbeddedFix set.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="zhlt_noclip"></a>zhlt_noclip</th>
+			<td>
+				<p>Strips all clipping information from the entity. Can be applied to any brush based entity.</p>
+				<p>Adding this key with a non-empty value to any brush entity will cause ALL clipping information for the brush entity to be stripped, making the entity non-solid in the game. If the value is set to 0, this attribute is ignored.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+
+	<h2><a id="new-entities"></a>New entities</h2>
+	<table>
+		<tr>
+			<th class="notranslate"><a id="info_compile_parameters"></a>info_compile_parameters</th>
+			<td>
+				<p>This is a point-based entity that you can place in your map, from which you can select standard compile settings instead of using the command line switches.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="notranslate"><a id="info_texlights"></a>info_texlights</th>
+			<td>
+				<p>This entity can act as a replacement for a <span class="notranslate">lights.rad</span> file, in that it simply resides within the map as a point based entity. The usefulness of this is that each map can have its own unique ambient lighting applied to it, and those settings will travel with the map and not affect any other maps.</p>
+				<p>Usage of the entity is much like that of the multimanager. To add an entry (take smart-edit off if you are using the Valve Hammer Editor/Worldcraft) and add key-value pairs in manually; the key should contain the name of the texture to apply lighting to, and the value a set of numbers representing the red green blue lumionsity(brightness) of the texture, just as you would in the <span class="notranslate">lights.rad</span> file.</p>
+				<p>The presence of this entity will not override the <span class="notranslate">lights.rad</span> file - both the values specified in this entity and the <span class="notranslate">lights.rad</span> file will be used by <span class="notranslate">HLRAD</span>.</p>
+			</td>
+		</tr>
+	</table>
+
+	<p><a href="#top">Back to top</a></p>
+	<p><a class="index" href="./">Back to the Index</a></p>
+</body>
+</html>
