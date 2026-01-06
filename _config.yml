@@ -1,2 +1,4 @@
 title: zhlt.info unofficial mirror
 description: An unofficial mirror site of http://zhlt.info (the site is currently unavailable, apparently abandoned by its author).
+plugins:
+  - jekyll-sitemap
